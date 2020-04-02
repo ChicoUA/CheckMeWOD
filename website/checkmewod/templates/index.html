@@ -7,19 +7,25 @@
     <meta name="keywords" content="Gutim, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gutim | Template</title>
+    <title>CheckMeWOD</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 </head>
 
 <body>
@@ -32,14 +38,15 @@
     <header class="header-section">
         <div class="container">
             <div class="logo">
-                <a href="./index.html">
-                    <img src="img/logo.png" alt="">
+                <a href="{% url 'index' %}">
+                    {% load static %}
+                    <img src="{% static 'img/logo.png' %}" alt="">
                 </a>
             </div>
             <div class="nav-menu">
                 <nav class="mainmenu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
+                        <li class="active"><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="./about-us.html">About</a></li>
                         <li><a href="./classes.html">Classes</a></li>
                         <li><a href="./blog.html">Blog</a></li>
@@ -55,7 +62,8 @@
     <!-- Header End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero-section set-bg" data-setbg="img/hero-bg.jpg">
+    {% load static %}
+    <section class="hero-section set-bg" data-setbg="{% static 'img/hero-bg.jpg' %}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -77,9 +85,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="about-pic">
-                        <img src="img/about-pic.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/about-pic.jpg' %}" alt="">
                         <a href="https://www.youtube.com/watch?v=SlPhMPnQ58k" class="play-btn video-popup">
-                            <img src="img/play.png" alt="">
+                            {% load static %}
+                            <img src="{% static 'img/play.png' %}" alt="">
                         </a>
                     </div>
                 </div>
@@ -106,7 +116,8 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="services-pic">
-                        <img src="img/services/service-pic.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/services/service-pic.jpg' %}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -114,13 +125,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="services-item bg-gray">
-                                    <img src="img/services/service-icon-1.png" alt="">
+                                    {% load static %}
+                                    <img src="{% static 'img/services/service-icon-1.png' %}" alt="">
                                     <h4>Strategies</h4>
                                     <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
                                         montes.</p>
                                 </div>
                                 <div class="services-item bg-gray pd-b">
-                                    <img src="img/services/service-icon-3.png" alt="">
+                                    {% load static %}
+                                    <img src="{% static 'img/services/service-icon-3.png' %}" alt="">
                                     <h4>Workout</h4>
                                     <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
                                         montes.</p>
@@ -128,13 +141,15 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="services-item">
-                                    <img src="img/services/service-icon-2.png" alt="">
+                                    {% load static %}
+                                    <img src="{% static 'img/services/service-icon-2.png' %}" alt="">
                                     <h4>Yoga</h4>
                                     <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
                                         montes.</p>
                                 </div>
                                 <div class="services-item pd-b">
-                                    <img src="img/services/service-icon-4.png" alt="">
+                                    {% load static %}
+                                    <img src="{% static 'img/services/service-icon-4.png' %}" alt="">
                                     <h4>Weight Loss</h4>
                                     <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
                                         montes.</p>
@@ -160,13 +175,15 @@
             </div>
             <div class="row classes-slider owl-carousel">
                 <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-1.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-1.jpg' %}">
                         <div class="si-text">
                             <h4>Yoga</h4>
                             <span><i class="fa fa-user"></i> Ryan Knight</span>
                         </div>
                     </div>
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-4.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-4.jpg' %}">
                         <div class="si-text">
                             <h4>Karate</h4>
                             <span><i class="fa fa-user"></i> Kevin McCormick</span>
@@ -174,13 +191,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-2.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-2.jpg' %}">
                         <div class="si-text">
                             <h4>Running</h4>
                             <span><i class="fa fa-user"></i> Randy Rivera</span>
                         </div>
                     </div>
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-5.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-5.jpg' %}">
                         <div class="si-text">
                             <h4>Dance</h4>
                             <span><i class="fa fa-user"></i> Russell Lane</span>
@@ -188,13 +207,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-3.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-3.jpg' %}">
                         <div class="si-text">
                             <h4>Personal Training</h4>
                             <span><i class="fa fa-user"></i> Cole Robertson</span>
                         </div>
                     </div>
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-6.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-6.jpg' %}">
                         <div class="si-text">
                             <h4>Weight Loss</h4>
                             <span><i class="fa fa-user"></i> Ryan Scott</span>
@@ -202,13 +223,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-7.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-7.jpg' %}">
                         <div class="si-text">
                             <h4>Personal Training</h4>
                             <span><i class="fa fa-user"></i> Cole Robertson</span>
                         </div>
                     </div>
-                    <div class="single-class-item set-bg" data-setbg="img/classes/classes-8.jpg">
+                    {% load static %}
+                    <div class="single-class-item set-bg" data-setbg="{% static 'img/classes/classes-8.jpg' %}">
                         <div class="si-text">
                             <h4>Weight Loss</h4>
                             <span><i class="fa fa-user"></i> Ryan Scott</span>
@@ -233,7 +256,8 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">
-                        <img src="img/trainer/trainer-1.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/trainer/trainer-1.jpg' %}" alt="">
                         <div class="trainer-text">
                             <h5>Patrick Cortez</h5>
                             <span>Leader</span>
@@ -250,7 +274,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">
-                        <img src="img/trainer/trainer-2.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/trainer/trainer-2.jpg' %}" alt="">
                         <div class="trainer-text">
                             <h5>Gregory Powers</h5>
                             <span>Gym coach</span>
@@ -267,7 +292,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">
-                        <img src="img/trainer/trainer-3.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/trainer/trainer-3.jpg' %}" alt="">
                         <div class="trainer-text">
                             <h5>Walter Wagner</h5>
                             <span>Dance trainer</span>
@@ -305,9 +331,11 @@
                                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                             <div class="ti-pic">
-                                <img src="img/testimonial/testimonial-1.jpg" alt="">
+                                {% load static %}
+                                <img src="{% static 'img/testimonial/testimonial-1.jpg' %}" alt="">
                                 <div class="quote">
-                                    <img src="img/testimonial/quote-left.png" alt="">
+                                    {% load static %}
+                                    <img src="{% static 'img/testimonial/quote-left.png' %}" alt="">
                                 </div>
                             </div>
                             <div class="ti-author">
@@ -320,9 +348,11 @@
                                 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                                 exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                             <div class="ti-pic">
-                                <img src="img/testimonial/testimonial-1.jpg" alt="">
+                                {% load static %}
+                                <img src="{% static 'img/testimonial/testimonial-1.jpg' %}" alt="">
                                 <div class="quote">
-                                    <img src="img/testimonial/quote-left.png" alt="">
+                                    {% load static %}
+                                    <img src="{% static 'img/testimonial/quote-left.png' %}" alt="">
                                 </div>
                             </div>
                             <div class="ti-author">
@@ -338,7 +368,8 @@
     <!-- Testimonial Section End -->
 
     <!-- Banner Section Begin -->
-    <section class="banner-section set-bg" data-setbg="img/banner-bg.jpg">
+    {% load static %}
+    <section class="banner-section set-bg" data-setbg="{% static 'img/banner-bg.jpg' %}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -350,7 +381,8 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <img src="img/banner-person.png" alt="">
+                    {% load static %}
+                    <img src="{% static 'img/banner-person.png' %}" alt="">
                 </div>
             </div>
         </div>
@@ -492,7 +524,8 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="register-pic">
-                        <img src="img/register-pic.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/register-pic.jpg' %}" alt="">
                     </div>
                 </div>
             </div>
@@ -513,7 +546,8 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog-item">
-                        <img src="img/blog/blog-1.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/blog/blog-1.jpg' %}" alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
                             <a href="#" class="tag">#Gym</a>
@@ -523,7 +557,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog-item">
-                        <img src="img/blog/blog-2.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/blog/blog-2.jpg' %}" alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
                             <a href="#" class="tag">#Sport</a>
@@ -533,7 +568,8 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog-item">
-                        <img src="img/blog/blog-3.jpg" alt="">
+                        {% load static %}
+                        <img src="{% static 'img/blog/blog-3.jpg' %}" alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
                             <a href="#" class="tag">#Body</a>
@@ -551,7 +587,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="footer-banner-item set-bg" data-setbg="img/footer-banner/footer-banner-1.jpg">
+                    {% load static %}
+                    <div class="footer-banner-item set-bg" data-setbg="{% static 'img/footer-banner/footer-banner-1.jpg' %}">
                         <span>New member</span>
                         <h2>7 days for free</h2>
                         <p>Complete the training sessions with us, surely you will be happy</p>
@@ -559,7 +596,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="footer-banner-item set-bg" data-setbg="img/footer-banner/footer-banner-2.jpg">
+                    {% load static %}
+                    <div class="footer-banner-item set-bg" data-setbg="{% static 'img/footer-banner/footer-banner-2.jpg' %}">
                         <span>contact us</span>
                         <h2>09 746 204</h2>
                         <p>If you trust us on your journey they dark sex does not disappoint you!</p>
@@ -594,7 +632,8 @@
                     </div>
                 </div>
             </div>
-            <div class="subscribe-option set-bg" data-setbg="img/footer-signup.jpg">
+            {% load static %}
+            <div class="subscribe-option set-bg" data-setbg="{% static 'img/footer-signup.jpg' %}">
                 <div class="so-text">
                     <h4>Subscribe To Our Mailing List</h4>
                     <p>Sign up to receive the latest information </p>
@@ -624,13 +663,20 @@
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    {% load static %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
