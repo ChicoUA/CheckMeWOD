@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Gutim Template">
+    <meta name="keywords" content="Gutim, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CheckMeWOD</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <div class="row"><div class="col-lg-8">
+                        <div class="hero-text">
+                       <span> <img src="{% static 'img/icons8-dumbbell-24.png' %}" style="margin-left: -100px;" alt=""> CheckMeWod </span>
+
+                    </div>
+                    </div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <nav class="mainmenu mobile-menu">
+                    <ul>
+                        <li class="active"><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="./about-us.html">About</a></li>
+                        <li><a href="./classes.html">Submits</a></li>
+                        <li><a href="./contact.html">Contacts</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    {% block content %}
+    {%  endblock %}
+
+    <!-- Js Plugins -->
+    {% load static %}
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
