@@ -1,4 +1,5 @@
 from django import forms
+from checkmewod import models
 from django.contrib.auth.models import User
 
 
@@ -49,3 +50,8 @@ class LoginForm(forms.ModelForm):
             'email': None,
             'password': None,
         }
+
+class DragNDropForm(forms.Form):
+    class Meta:
+        model = models.VideoSubmission()
+        fields = ['video_file' ]

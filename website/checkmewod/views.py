@@ -3,12 +3,13 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from checkmewod.forms import RegisterForm, LoginForm
+from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
 
 
 # Create your views here.
 from checkmewod.models import MyUser
 
+videocount=0
 
 def index(request):
     params = {
@@ -94,6 +95,19 @@ def log_out(request):
     logout(request)
     return index(request)
 
-@login_required
+
 def classes(request):
+    if request.method == 'POST':
+        form = DragNDropForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            print('valid form')
+            f=request.FILES['video_file']
+            with open('checkmewod/uploaded_files/video'+str(videocount)+'.mov', 'wb+') as destination:
+                for chunk in f.chunks():
+                    destination.write(chunk)
+
+        else:
+            print('invalid form')
+            print(form.errors)
     return render(request, 'submit.html')
+

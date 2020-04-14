@@ -6,3 +6,6 @@ from django.contrib.auth.models import User
 
 class MyUser(models.Model):
     user = models.OneToOneField(User, unique=True, primary_key=True, on_delete=models.CASCADE)
+
+class VideoSubmission(models.Model):
+    video_file = models.FileField
