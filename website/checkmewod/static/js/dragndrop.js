@@ -15,6 +15,7 @@
     Array.prototype.forEach.call( forms, function( form )
     {
         var input		 = form.querySelector( 'input[type="file"]' ),
+            button       = document.getElementById("submit_button"),
             label		 = form.querySelector( 'label' ),
             errorMsg	 = form.querySelector( '.box__error span' ),
             restart		 = form.querySelectorAll( '.box__restart' ),
@@ -41,16 +42,13 @@
         input.addEventListener( 'change', function( e )
         {
             showFiles( e.target.files );
-
-            
-            triggerFormSubmit();
-
+            button.style.display="block";
             
         });
 
         // drag&drop files if the feature is available
         if( isAdvancedUpload )
-        {
+        {   
             form.classList.add( 'has-advanced-upload' ); // letting the CSS part to know drag&drop is supported by the browser
 
             [ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( function( event )
@@ -80,11 +78,11 @@
             {
                 droppedFiles = e.dataTransfer.files; // the files that were dropped
                 showFiles( droppedFiles );
-
-                
-                triggerFormSubmit();
+                button.style.display="block";
 
                                 });
+            
+
         }
 
 
@@ -120,7 +118,8 @@
                     form.classList.remove( 'is-uploading' );
                     if( ajax.status >= 200 && ajax.status < 400 )
                     {
-                        var data = JSON.parse( ajax.responseText );
+                        console.log(ajax.responseText)
+                        var data = JSON.parse(ajax.responseText);
                         form.classList.add( data.success == true ? 'is-success' : 'is-error' );
                         if( !data.success ) errorMsg.textContent = data.error;
                     }
@@ -154,6 +153,7 @@
                     form.classList.remove( 'is-uploading' )
                     form.classList.add( data.success == true ? 'is-success' : 'is-error' )
                     form.removeAttribute( 'target' );
+                    console.log(data.success)
                     if( !data.success ) errorMsg.textContent = data.error;
                     iframe.parentNode.removeChild( iframe );
                 });
@@ -178,3 +178,4 @@
 
     });
 }( document, window, 0 ));
+

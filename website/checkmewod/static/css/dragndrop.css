@@ -1,7 +1,6 @@
 html
 	{
-		}
-					
+		}		
 				.box
 				{
 					font-size: 1.25rem; /* 20 */
@@ -60,6 +59,7 @@ html
 					{
 						display: block;
 						position: absolute;
+						text-align: center;
 						top: 50%;
 						right: 0;
 						left: 0;
@@ -117,22 +117,17 @@ html
 						display: inline-block;
 						overflow: hidden;
 					}
-					.js .box__file + label:hover strong,
-					.box__file:focus + label strong,
-					.box__file.has-focus + label strong
-					{
+
+					strong:hover{
 						color: #39bfd3;
 					}
+
 					.js .box__file:focus + label,
 					.js .box__file.has-focus + label
 					{
 						outline: 1px dotted #000;
 						outline: -webkit-focus-ring-color auto 5px;
 					}
-						.js .box__file + label *
-						{
-							/* pointer-events: none; */ /* in case of FastClick lib use */
-						}
 
 					.no-js .box__file + label
 					{

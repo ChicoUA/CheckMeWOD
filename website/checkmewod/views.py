@@ -8,6 +8,8 @@ from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
 
 # Create your views here.
 from checkmewod.models import MyUser
+from django.http import HttpResponse
+import json
 
 videocount=0
 
@@ -100,14 +102,15 @@ def classes(request):
     if request.method == 'POST':
         form = DragNDropForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            print('valid form')
             f=request.FILES['video_file']
-            with open('checkmewod/uploaded_files/video'+str(videocount)+'.mov', 'wb+') as destination:
+            name = f.name
+            with open('checkmewod/uploaded_files/'+name, 'wb+') as destination:
                 for chunk in f.chunks():
                     destination.write(chunk)
-
+            return HttpResponse(json.dumps({"success":True}))
         else:
-            print('invalid form')
-            print(form.errors)
-    return render(request, 'submit.html')
+            #print(form.errors)
+            return HttpResponse(json.dumps({"success":False}))
+    else:
+        return render(request, 'submit.html')
 
