@@ -34,9 +34,9 @@ def log_in(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         password = request.POST['password']
-        email = request.POST['email']
-        if User.objects.filter(email=email).exists():
-            user = authenticate(email=email, password=password)
+        username = request.POST['username']
+        if User.objects.filter(username=username).exists():
+            user = authenticate(username=username, password=password)
             if user is None:
                 messages += ['Failed!']
             else:
@@ -97,7 +97,7 @@ def log_out(request):
     logout(request)
     return index(request)
 
-
+@login_required
 def classes(request):
     if request.method == 'POST':
         form = DragNDropForm(data=request.POST, files=request.FILES)

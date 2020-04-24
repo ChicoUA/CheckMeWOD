@@ -33,9 +33,9 @@ class RegisterForm(forms.ModelForm):
 class LoginForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['email', 'password']
+        fields = ['username', 'password']
         widgets = {
-            'email': forms.TextInput(
+            'username': forms.TextInput(
                 attrs={
                     'class': 'form-control'
                 }
@@ -47,7 +47,7 @@ class LoginForm(forms.ModelForm):
             ),
         }
         help_texts = {
-            'email': None,
+            'username': None,
             'password': None,
         }
 

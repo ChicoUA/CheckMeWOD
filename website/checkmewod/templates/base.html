@@ -27,6 +27,29 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/dragndrop.css' %}" type="text/css">
+    <script>
+        /* When the user clicks on the button, 
+        toggle between hiding and showing the dropdown content */
+        function userDropdown() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("display-user-dropdown");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              console.log("buh");
+              if (openDropdown.classList.contains('show')) {
+                console.log("bukjsabj");
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+    </script>
 </head>
 
 <body>
@@ -53,13 +76,28 @@
                 <nav class="mainmenu mobile-menu">
                     <ul>
                         <li><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="./about-us.html">About</a></li>
-                        <li><a href="./submit.html">Submits</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'submit' %}">Submits</a></li>
                         <li><a href="./contact.html">Contacts</a></li>
                     </ul>
                 </nav>
-                <a href="./register.html" class="primary-btn signup-btn">Sign Up Today</a>
-                <a href="./login.html" class="primary-btn signup-btn">Login</a>
+                {% if user.is_authenticated %}
+                    <div class="user-dropdown">
+                        <a onclick="userDropdown()" class="primary-btn dropbtn">{{ user.get_username }}
+                            <i class="fa fa-caret-down ml4"></i>
+                        </a>
+                        <div class="display-user-dropdown" id="myDropdown">
+                        
+                            <a href="" class="primary-btn">Profile</a>
+                            <a href="{% url 'logout' %}" class="primary-btn">Logout</a>
+                        
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'register' %}" class="primary-btn signup-btn">Sign Up Today</a>
+                    <a href="{% url 'login' %}" class="primary-btn signup-btn">Login</a>
+                {% endif %} 
+                
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
