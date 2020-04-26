@@ -77,11 +77,12 @@
                     <ul>
                         <li><a href="{% url 'index' %}">Home</a></li>
                         <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="{% url 'submit' %}">Submits</a></li>
-                        <li><a href="./contact.html">Contacts</a></li>
+                        <li><a href="{% url 'submit' %}">Submit</a></li>
+                        <li><a href="{% url 'contact' %}">Contacts</a></li>
                     </ul>
                 </nav>
                 {% if user.is_authenticated %}
+                    <a class="affiliate-btn" href="{% url 'contact' %}" style="color:#fff;">I'm an affiliate</a>
                     <div class="user-dropdown">
                         <a onclick="userDropdown()" class="primary-btn dropbtn">{{ user.get_username }}
                             <i class="fa fa-caret-down ml4"></i>

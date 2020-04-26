@@ -137,6 +137,34 @@ ul, ol {
 }
 /* buttons */
 
+.affiliate-btn {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 0 12px;
+	color: #ffffff;
+	text-align: center;
+	width: 160px;
+	height: 46px;
+	border-left: 2px solid #d1d1d1;
+	border-right: 2px solid #d1d1d1;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-position: 0 0, 0 100%;
+	background-repeat: no-repeat;
+	background-size: 100% 2px;
+	background-color: rgba(30, 41, 41, 0.63);
+	background-image: -webkit-gradient(linear, left top, right top, from(#d1d1d1), to(#f67831)), -webkit-gradient(linear, left top, right top, from(#d1d1d1), to(#d1d1d1));
+	background-image: -o-linear-gradient(left, #d1d1d1 0%, #d1d1d1 100%), -o-linear-gradient(left, #d1d1d1 0%, #d1d1d1 100%);
+	background-image: linear-gradient(to right, #d1d1d1 0%, #d1d1d1 100%), linear-gradient(to right, #d1d1d1 0%, #d1d1d1 100%);
+	-webkit-transition-duration: 1000ms;
+	-o-transition-duration: 1000ms;
+	transition-duration: 1000ms;
+	line-height: 45px;
+	position: relative;
+	z-index: 1;
+}
+
 .primary-btn {
 	display: inline-block;
 	font-size: 16px;

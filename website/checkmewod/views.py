@@ -10,6 +10,7 @@ from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
 from checkmewod.models import MyUser
 from django.http import HttpResponse
 import json
+from django.http.response import HttpResponseRedirect
 
 videocount=0
 
@@ -18,7 +19,7 @@ def index(request):
         'title': 'Home Page',
         'login': False
     }
-    return render(request, 'index.html', params)
+    return render(request, 'index.html')
 
 
 def about(request):
@@ -28,9 +29,16 @@ def about(request):
     }
     return render(request, 'about-us.html')
 
+def contact(request):
+    return render(request, 'contact.html')
+
 
 def log_in(request):
     messages = []
+    next = ""
+
+    if request.GET:  
+        next = request.GET['next']
     if request.method == 'POST':
         form = LoginForm(request.POST)
         password = request.POST['password']
@@ -41,7 +49,11 @@ def log_in(request):
                 messages += ['Failed!']
             else:
                 login(request, user)
-                return index(request)
+                if next == "":
+                    print("bruv")
+                    return HttpResponseRedirect("/checkmewod")
+                else:
+                    return HttpResponseRedirect(next)
         else:
             messages += ['Failed!']
     else:
@@ -95,7 +107,7 @@ def register(request):
 @login_required
 def log_out(request):
     logout(request)
-    return index(request)
+    return HttpResponseRedirect("/checkmewod")
 
 @login_required
 def classes(request):
