@@ -5,14 +5,14 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
 
-
 # Create your views here.
 from checkmewod.models import MyUser
 from django.http import HttpResponse
 import json
 from django.http.response import HttpResponseRedirect
 
-videocount=0
+videocount = 0
+
 
 def index(request):
     params = {
@@ -29,6 +29,7 @@ def about(request):
     }
     return render(request, 'about-us.html')
 
+
 def contact(request):
     return render(request, 'contact.html')
 
@@ -37,7 +38,7 @@ def log_in(request):
     messages = []
     next = ""
 
-    if request.GET:  
+    if request.GET:
         next = request.GET['next']
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -65,8 +66,6 @@ def log_in(request):
         'form': form
     }
     return render(request, 'login.html', params)
-
-
 
 
 def register(request):
@@ -109,24 +108,31 @@ def log_out(request):
     logout(request)
     return HttpResponseRedirect("/checkmewod")
 
+
 @login_required
 def classes(request):
     if request.method == 'POST':
         form = DragNDropForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            f=request.FILES['video_file']
+            f = request.FILES['video_file']
             name = f.name
-            file_extensions=(".mov", ".mp4", ".avi", ".flv", ".wmv")
+            file_extensions = (".mov", ".mp4", ".avi", ".flv", ".wmv")
             if name.endswith(file_extensions):
-                with open('checkmewod/uploaded_files/'+name, 'wb+') as destination:
+                with open('checkmewod/uploaded_files/' + name, 'wb+') as destination:
                     for chunk in f.chunks():
                         destination.write(chunk)
-                return HttpResponse(json.dumps({"success":True}))
+                return HttpResponse(json.dumps({"success": True}))
             else:
-                return HttpResponse(json.dumps({"success":"extensionError"}))
+                return HttpResponse(json.dumps({"success": "extensionError"}))
         else:
-            #print(form.errors)
-            return HttpResponse(json.dumps({"success":False}))
+            # print(form.errors)
+            return HttpResponse(json.dumps({"success": False}))
     else:
         return render(request, 'submit.html')
 
+
+def event(request):
+    return render(request, 'event.html')
+
+def add_event(request):
+    return render(request, 'add-event.html')

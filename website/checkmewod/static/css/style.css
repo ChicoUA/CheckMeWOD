@@ -178,7 +178,21 @@ ul, ol {
 	color: #fff;
 }
 /* buttons */
-
+.stats{
+	display: table-cell;
+	float: left;
+}
+.thumb{
+	display: table-cell;
+	float: left;
+	margin-left: 100px;
+}
+.info{
+	display: table-cell;
+	float: left;
+	width: 300px;
+	margin-left: 100px;
+}
 .affiliate-btn {
 	display: inline-block;
 	font-size: 16px;
