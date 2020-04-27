@@ -55,3 +55,5 @@ class DragNDropForm(forms.Form):
     class Meta:
         model = models.VideoSubmission()
         fields = ['video_file' ]
+
+        

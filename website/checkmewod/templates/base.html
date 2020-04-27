@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/dragndrop.css' %}" type="text/css">
+    
+</head>
+
+<body>
     <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
@@ -41,18 +45,13 @@
             var i;
             for (i = 0; i < dropdowns.length; i++) {
               var openDropdown = dropdowns[i];
-              console.log("buh");
               if (openDropdown.classList.contains('show')) {
-                console.log("bukjsabj");
                 openDropdown.classList.remove('show');
               }
             }
           }
         }
     </script>
-</head>
-
-<body>
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>

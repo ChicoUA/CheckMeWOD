@@ -120,7 +120,11 @@
                     {
                         console.log(ajax.responseText)
                         var data = JSON.parse(ajax.responseText);
-                        form.classList.add( data.success == true ? 'is-success' : 'is-error' );
+                        if (data.success == "extensionError"){
+                            form.classList.add('is-extension-error');
+                        }else{
+                            form.classList.add( data.success == true ? 'is-success' : 'is-error' );
+                        }
                         if( !data.success ) errorMsg.textContent = data.error;
                     }
                     else alert( 'Error. Please, contact the webmaster!' );

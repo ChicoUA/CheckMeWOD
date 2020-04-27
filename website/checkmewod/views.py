@@ -116,10 +116,14 @@ def classes(request):
         if form.is_valid():
             f=request.FILES['video_file']
             name = f.name
-            with open('checkmewod/uploaded_files/'+name, 'wb+') as destination:
-                for chunk in f.chunks():
-                    destination.write(chunk)
-            return HttpResponse(json.dumps({"success":True}))
+            file_extensions=(".mov", ".mp4", ".avi", ".flv", ".wmv")
+            if name.endswith(file_extensions):
+                with open('checkmewod/uploaded_files/'+name, 'wb+') as destination:
+                    for chunk in f.chunks():
+                        destination.write(chunk)
+                return HttpResponse(json.dumps({"success":True}))
+            else:
+                return HttpResponse(json.dumps({"success":"extensionError"}))
         else:
             #print(form.errors)
             return HttpResponse(json.dumps({"success":False}))

@@ -46,20 +46,23 @@ html
 
 					.box.is-uploading .box__input,
 					.box.is-success .box__input,
-					.box.is-error .box__input
+					.box.is-error .box__input,
+					.box.is-extension-error .box__input
 					{
 						visibility: hidden;
 					}
 
 					.box__uploading,
 					.box__success,
-					.box__error
+					.box__error,
+					.box__extension__error
 					{
 						display: none;
 					}
 					.box.is-uploading .box__uploading,
 					.box.is-success .box__success,
-					.box.is-error .box__error
+					.box.is-error .box__error,
+					.box.is-extension-error .box__extension__error
 					{
 						display: block;
 						position: absolute;
