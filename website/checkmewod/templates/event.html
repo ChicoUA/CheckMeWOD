@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb/classes-breadcrumb.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Events</h2>
+                        <div class="breadcrumb-option">
+                            <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                            <span>Events</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <a href="{% url 'event2' %}" class="primary-btn">Submit Event</a>
+                </div>
+            </div>
+        </div>
+
+
+    <section class="event-section ">
+        <div class="container" >
+            <div class="row">
+                    <div class="stats" style="margin-top: 60px">
+                        <div class="day">01 </div>
+                        <div class="month">May</div>
+                        <div class="year">2020</div>
+                        <img src="https://www.boxrox.com/wp-content/themes/boxrox/images/icons/countries/portugal.png" alt="">
+                    </div>
+
+                    <div class="thumb" style="margin-top: 60px">
+                        {% load static %}
+                        <img src="{% static 'img/crossfitevent.png' %}" alt="">
+                    </div>
+
+                    <div class="info" style="margin-top: 60px">
+                        <a href="https://www.boxrox.com/competition/the-alpha-battle/"><h2>Down Under Crossfit</h2> </a>
+                        <p> Trail running; Ocean Swim; Weightlifting; PowerLifting; Gymnastics; Worm; </p>
+                    <div class="meta" style="margin-top: 60px">
+                        <div class="city">Lisbon</div>
+                        <div class="location">Oeiras</div>
+
+                    </div>
+
+                    </div>
+            </div>
+            </div>
+            </div>
+        </div>
+
+    <div class="container">
+            <div class="row">
+                    <div class="stats" style="margin-top: 60px">
+                        <div class="day">23 </div>
+                        <div class="month">May</div>
+                        <div class="year">2020</div>
+                        <img src="https://www.boxrox.com/wp-content/themes/boxrox/images/icons/countries/sweden.png">
+                    </div>
+
+                    <div class="thumb" style="margin-top: 60px">
+                        {% load static %}
+                        <img src="{% static 'img/crossfitevent2.png' %}" alt="">
+                    </div>
+
+                    <div class="info" style="margin-top: 60px">
+                        <a href="https://www.boxrox.com/competition/the-alpha-battle/"><h2>Kronan Throwdown All Level Edition</h2> </a>
+                        <p> Trail running; Ocean Swim; Weightlifting; PowerLifting; Gymnastics; Worm; </p>
+                    <div class="meta" style="margin-top: 60px">
+                        <div class="city">Lisbon</div>
+                        <div class="location">Oeiras</div>
+
+                    </div>
+
+                    </div>
+            </div>
+            </div>
+            </div>
+        </div>
+
+
+    <div class="container">
+            <div class="row">
+                    <div class="stats" style="margin-top: 60px">
+                        <div class="day">23 </div>
+                        <div class="month">May</div>
+                        <div class="year">2020</div>
+                        <img src="https://www.boxrox.com/wp-content/themes/boxrox/images/icons/countries/italy.png">
+                    </div>
+
+                    <div class="thumb" style="margin-top: 60px">
+                        {% load static %}
+                        <img src="{% static 'img/crossfitevent3.png' %}" alt="">
+                    </div>
+
+                    <div class="info" style="margin-top: 60px">
+                        <a href="https://www.boxrox.com/competition/the-alpha-battle/"><h2>Napolithrowdown</h2> </a>
+                        <p> Trail running; Ocean Swim; Weightlifting; PowerLifting; Gymnastics; Worm; </p>
+                    <div class="meta" style="margin-top: 30px">
+                        <div class="city">Lisbon</div>
+                        <div class="location">Oeiras</div>
+
+                    </div>
+
+                    </div>
+            </div>
+            </div>
+            </div>
+        </div>
+
+    </section>
+
+{%  endblock %}
