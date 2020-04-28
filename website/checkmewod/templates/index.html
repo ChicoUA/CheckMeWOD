@@ -39,13 +39,11 @@
                     <div class="only-text">
 
                         <h2>Keep your Eyes on Events about Crossfit !</h2>
-                        <p class="first-para">Lorem ipsum proin gravida nibh vel velit auctor aliquet. Aenean pretium
-                            sollicitudin, nascetur auci elit consequat ipsutissem niuis sed odio sit amet nibh vulputate
-                            cursus a amet.</p>
-                        <p class="second-para">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, gravida
-                            quam semper libero sit amet. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
-                            rhoncus, gravida quam semper libero sit amet.</p>
-                        <a href="#" class="primary-btn">Read More</a>
+                        <p class="first-para">Whether you’re a competitive athlete or simply a CrossFit fan, keep your eyes on the exciting CrossFit events coming your way this spring.
+                            It’s going to be a fun spring in the world of CrossFit. Good luck competing, and enjoy the show!</p>
+                        <p class="second-para">And if you’re looking to host a CrossFit competition of your own, we have everything you need to handle the moving pieces of your competition seamlessly.
+                            From payments and registration, CheckMeWod does it all!</p>
+                        <a href="{% url 'event1' %}"class="primary-btn">Find Out More</a>
                     </div>
                 </div>
             </div>
@@ -70,9 +68,8 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="testimonial-slider owl-carousel">
                         <div class="testimonial-item">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>"I'm so glad to have found this platform.
+                                It helped me a lot to do the exercises in a correct way, since I was having health problems because I performed the exercises badly." </p>
                             <div class="ti-pic">
                                 {% load static %}
                                 <img src="{% static 'img/testimonial/testimonial-1.jpg' %}" alt="">
@@ -83,25 +80,45 @@
                             </div>
                             <div class="ti-author">
                                 <h4>Patrick Cortez</h4>
-                                <span>Leader</span>
+                                <span>lawyer</span>
                             </div>
                         </div>
                         <div class="testimonial-item">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            <p>"I love Crossfit!
+I                               can submit a Wod video    and get feedback from the staff,
+                                so I know I'm doing the exercise the right way or not.
+I                               can also watch the list of events about this sport during the days acted."</p>
                             <div class="ti-pic">
                                 {% load static %}
-                                <img src="{% static 'img/testimonial/testimonial-1.jpg' %}" alt="">
+                                <img src="{% static 'img/testimonial/testemonial2.jpeg' %}" alt="">
                                 <div class="quote">
                                     {% load static %}
                                     <img src="{% static 'img/testimonial/quote-left.png' %}" alt="">
                                 </div>
                             </div>
                             <div class="ti-author">
-                                <h4>Patrick Cortez</h4>
-                                <span>Leader</span>
+                                <h4>Chris Paul</h4>
+                                <span>Teacher</span>
                             </div>
+
+                        </div>
+                        <div class="testimonial-item">
+                            <p>"Having worked with personal trainers in the past (and failed), I was cautious about starting again!
+                                After submit my video, I couldn't be happier and fitter.
+                                I can really see the results and it's so refreshing to find a platform who REALLY knows what they are talking about." </p>
+                            <div class="ti-pic">
+                                {% load static %}
+                                <img src="{% static 'img/testimonial/testemonial3.jpg' %}" alt="">
+                                <div class="quote">
+                                    {% load static %}
+                                    <img src="{% static 'img/testimonial/quote-left.png' %}" alt="">
+                                </div>
+                            </div>
+                            <div class="ti-author">
+                                <h4>John Miles</h4>
+                                <span>Artist</span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
