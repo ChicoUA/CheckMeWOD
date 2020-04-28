@@ -73,7 +73,10 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
+            print("oh yeah baby")
             username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password']
             password2 = form.cleaned_data['confirm_password']
@@ -81,13 +84,18 @@ def register(request):
             if password1 == password2:
                 if User.objects.filter(email=email).exists():
                     messages += ['Email already in use!']
-
                 else:
+                    if User.objects.filter(username=username).exists():
+                        messages += ['Username already in use!']
 
-                    user = User(email=email, username=username)
-                    user.set_password(password1)
-                    user.save()
-                    return redirect('login')
+                    else:
+                        user = User.objects.create_user(username, email, password1)
+                        user.first_name = first_name
+                        user.last_name = last_name
+                        user.save()
+                        user = authenticate(username=username, password=password1)
+                        login(request, user)
+                        return HttpResponseRedirect("/checkmewod")
             else:
                 messages += ['Password not matching!']
         else:
@@ -106,7 +114,7 @@ def register(request):
 @login_required
 def log_out(request):
     logout(request)
-    return HttpResponseRedirect("/checkmewod")
+    return HttpResponseRedirect("")
 
 
 @login_required

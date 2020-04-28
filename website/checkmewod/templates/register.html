@@ -26,10 +26,15 @@
                                 <div class="section-title">
                                     <h2>Register Now</h2>
                                 </div>
-                                <form action="{%  url 'register' %}" class="register-form">
+                                <form class="register-form" method="POST">
                                     {% csrf_token %}
                                     {{ form.as_p }}
                                     <button type="submit" class="register-btn">Get Started</button>
+                                    <div>
+                                        {% for message in messages %}
+                                            <h3 class="badge badge-dark" style="width: 100%; font-size: large"> {{ message }}</h3>
+                                        {% endfor %}
+                                    </div>
                                 </form>
                             </div>
                         </div>
