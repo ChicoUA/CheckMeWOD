@@ -114,7 +114,7 @@ def register(request):
 @login_required
 def log_out(request):
     logout(request)
-    return HttpResponseRedirect("")
+    return HttpResponseRedirect("/checkmewod")
 
 
 @login_required
@@ -144,3 +144,7 @@ def event(request):
 
 def add_event(request):
     return render(request, 'add-event.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

@@ -26,6 +26,22 @@
 10.  Footer Style
 
 -------------------------------------------------------------------*/
+
+.image-cropper{
+	width: 160px;
+    height: 160px;
+    position: relative;
+	overflow: hidden;
+	margin: auto;
+    border-radius: 50%;
+}
+
+.profile-img{
+	display: inline;
+	margin: 0 auto;
+	margin-left: -25%;
+}
+
 .acc h3 {
     font-size: 25px;
     background-color: rgba(0,0,0,0.6);
@@ -936,6 +952,35 @@ ul, ol {
 /*---------------------
   Login Section
 -----------------------*/
+.profile-section {
+	background: #f5f4f4;
+	padding-top: 235px;
+	margin-top: -135px;
+}
+.profile-section.classes-page {
+	background: #ffffff;
+	padding-top: 70px;
+	margin-top: 0;
+	padding-bottom: 0;
+}
+.profile-section.classes-page .classes-page-text {
+	-webkit-box-shadow: 0px 12px 21px rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 12px 21px rgba(0, 0, 0, 0.315);
+}
+
+.profile-text {
+	padding: 50px 70px 60px 70px;
+	background: #ffffff;
+	margin-right: -15px;
+}
+
+.profile-text p{
+	font-size: 20px;
+}
+
+.profile-text i{
+	margin-right: 10px;
+}
 
 .login-section {
 	background: #f5f4f4;
@@ -1192,6 +1237,10 @@ ul, ol {
 	padding-top: 190px;
 	height: 400px;
 }
+.breadcrumb-section-profile {
+	padding-top: 170px;
+	height: 400px;
+}
 .breadcrumb-text {
 	text-align: center;
 }
@@ -1200,6 +1249,14 @@ ul, ol {
 	color: #ffffff;
 	font-weight: 600;
 	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+.breadcrumb-text h3 {
+	font-size: 30px;
+	color: #ffffff;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-top: 8px;
 	margin-bottom: 10px;
 }
 .breadcrumb-text .breadcrumb-option a {

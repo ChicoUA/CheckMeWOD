@@ -15,6 +15,7 @@ urlpatterns = [
     path('event', views.event, name='event1'),
     path('addevent', views.add_event, name='event2'),
     path('logout', views.log_out, name='logout'),
-    path('contact', views.contact, name='contact')
+    path('contact', views.contact, name='contact'),
+    path('profile', views.profile, name='profile')
 
 ]
