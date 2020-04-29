@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import render, redirect
+
 from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
 
 # Create your views here.
@@ -118,11 +119,13 @@ def log_out(request):
 
 
 @login_required
-def classes(request):
+def video_sub(request):
     if request.method == 'POST':
         form = DragNDropForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             f = request.FILES['video_file']
+            print(request.POST['exercise_in_video'])
+            print(request.POST['number_reps'])
             name = f.name
             file_extensions = (".mov", ".mp4", ".avi", ".flv", ".wmv")
             if name.endswith(file_extensions):

@@ -3,7 +3,8 @@ html
 		}	
 			.form-section
 			{
-				padding-top: 100px;
+				padding-top: 20px;
+				padding-bottom: 200px;
 			}
 				.box
 				{
@@ -141,23 +142,59 @@ html
 						display: none;
 					}
 
-					.no-js .box__button
+					.no-js .box__button, .no-js .box__exercise, .no-js .box__reps
 					{
 						display: block;
 					}
+					
 					.box__button
 					{
 						font-weight: 700;
 						color: #e5edf1;
+						border-radius: 25px;
 						background-color: #39bfd3;
 						display: none;
+						outline: none;
+						border: none;
 						padding: 8px 16px;
-						margin: 40px auto 0;
+						margin: 85px auto 0;
 					}
 						.box__button:hover,
 						.box__button:focus
 						{
 							background-color: #0f3c4b;
 						}
+					
+					.box__exercise{
+						display:none;
+						background-color: #ffffff;
+						color: rgb(0, 0, 0);
+						padding: 12px;
+						width: 250px;
+						border: none;
+						font-size: 20px;
+						outline: none;
+						float: left;
+						border-radius: 25px;				
+					}
+
+					.box__reps{
+						display:none;
+						float: right;
+						border-radius: 25px;
+						background-color: #ffffff;
+						color: rgb(0, 0, 0);
+						padding: 12px;
+						width: 250px;
+						border: none;
+						font-size: 20px;
+						outline: none;
+					}
+
+					.exercise_reps{
+						padding-top: 30px;
+						padding-left: 260px;
+						padding-right: 260px;
+					}
 
 	

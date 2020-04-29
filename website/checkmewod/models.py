@@ -8,3 +8,5 @@ class MyUser(models.Model):
 
 class VideoSubmission(models.Model):
     video_file = models.FileField
+    exercise_in_video = models.TextField
+    number_reps = models.TextField

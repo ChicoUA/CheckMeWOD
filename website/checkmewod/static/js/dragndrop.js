@@ -16,6 +16,8 @@
     {
         var input		 = form.querySelector( 'input[type="file"]' ),
             button       = document.getElementById("submit_button"),
+            exercise     = document.getElementById("exercise"),
+            reps         = document.getElementById("reps"),
             label		 = form.querySelector( 'label' ),
             errorMsg	 = form.querySelector( '.box__error span' ),
             restart		 = form.querySelectorAll( '.box__restart' ),
@@ -33,7 +35,7 @@
 
         // letting the server side to know we are going to make an Ajax request
         var ajaxFlag = document.createElement( 'input' );
-        ajaxFlag.setAttribute( 'type', 'hidden' );
+        ajaxFlag.setAttribute( 'type', 'hidden' );input
         ajaxFlag.setAttribute( 'name', 'ajax' );
         ajaxFlag.setAttribute( 'value', 1 );
         form.appendChild( ajaxFlag );
@@ -42,7 +44,8 @@
         input.addEventListener( 'change', function( e )
         {
             showFiles( e.target.files );
-            button.style.display="block";
+            exercise.style.display="block";
+            reps.style.display="block";
             
         });
 
@@ -78,13 +81,31 @@
             {
                 droppedFiles = e.dataTransfer.files; // the files that were dropped
                 showFiles( droppedFiles );
-                button.style.display="block";
+                exercise.style.display="block";
+                reps.style.display="block";
+                
 
-                                });
+            });
             
 
         }
 
+        
+        exercise.addEventListener('change', function(){
+            if(!(exercise.value.trim()=="" || reps.value.trim()=="" )){
+                button.style.display="block";
+            }else{
+                button.style.display="none";
+            }
+        })
+        
+        reps.addEventListener('change', function(){
+            if(!(exercise.value.trim()=="" || reps.value.trim()=="" )){
+                button.style.display="block";
+            }else{
+                button.style.display="none";
+            }
+        })
 
         // if the form was submitted
         form.addEventListener( 'submit', function( e )
@@ -98,21 +119,20 @@
             if( isAdvancedUpload ) // ajax file upload for modern browsers
             {
                 e.preventDefault();
-
                 // gathering the form data
                 var ajaxData = new FormData( form );
                 if( droppedFiles )
                 {
                     Array.prototype.forEach.call( droppedFiles, function( file )
                     {
+                        console.log(input.getAttribute( 'name' ));
                         ajaxData.append( input.getAttribute( 'name' ), file );
                     });
                 }
-
+                
                 // ajax request
                 var ajax = new XMLHttpRequest();
                 ajax.open( form.getAttribute( 'method' ), form.getAttribute( 'action' ), true );
-
                 ajax.onload = function()
                 {
                     form.classList.remove( 'is-uploading' );
@@ -162,6 +182,7 @@
                     iframe.parentNode.removeChild( iframe );
                 });
             }
+            
         });
 
 

@@ -56,6 +56,6 @@ class LoginForm(forms.ModelForm):
 class DragNDropForm(forms.Form):
     class Meta:
         model = models.VideoSubmission()
-        fields = ['video_file' ]
+        fields = ['video_file', 'exercise_in_video', 'number_reps' ]
 
         
