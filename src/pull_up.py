@@ -1,5 +1,5 @@
-from .utils import check_close
-from .json_reader import *
+from utils import check_close
+from json_reader import *
 import logging
 
 LEFT_WRIST_VALUE = 7

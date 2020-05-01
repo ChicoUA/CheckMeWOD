@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-from .utils import check_close
-from .json_reader import *
-=======
 from utils import check_close
 from json_reader import *
->>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
 import logging
 
 HIP_VALUE = 8
@@ -94,11 +89,7 @@ class air_squat:
 
             return shoulder_position_right if shoulder_position_right != 0 else shoulder_position_left
 
-<<<<<<< HEAD
     def check_exercise(self):
-=======
-    def check_squat(self):
->>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
         last_value_x = 0
         last_value_y = 0
         new_value_y = 0
@@ -121,15 +112,9 @@ class air_squat:
 
             if going_down and last_value_y < new_value_y and not check_close(new_value_y, last_value_y):
                 if not self.check_if_still_going_down(new_value_y, i):
-<<<<<<< HEAD
                     knee_y_position = self.get_knee_value(i)[1]
                     self.counted_reps += 1
                     if self.check_down_position(last_value_y, knee_y_position):
-=======
-                    knee_y_position = self.get_knee_value(i)
-                    self.counted_reps += 1
-                    if self.check_down_position(last_value_y, knee_y_position[1]):
->>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
                         self.correct_reps += 1
                     else:
                         self.no_reps += 1
@@ -138,17 +123,10 @@ class air_squat:
 
             elif not going_down and last_value_y > new_value_y and not check_close(last_value_y, new_value_y):
                 if not self.check_if_still_going_up(new_value_y, i):
-<<<<<<< HEAD
                     knee_x_position = self.get_knee_value(i)[0]
                     shoulder_x_position = self.get_shoulder_value(i)[0]
                     self.counted_reps += 1
                     if self.check_up_position(shoulder_x_position, last_value_x, knee_x_position):
-=======
-                    knee_x_position = self.get_knee_value(i)
-                    shoulder_x_position = self.get_shoulder_value(i)
-                    self.counted_reps += 1
-                    if self.check_up_position(shoulder_x_position[0], last_value_x, knee_x_position[0]):
->>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
                         self.correct_reps += 1
                     else:
                         self.no_reps += 1
@@ -165,13 +143,10 @@ class air_squat:
 
 def main():
     squat = air_squat(3, "output_json/")
-<<<<<<< HEAD
     reps, no_reps = squat.check_exercise()
-=======
-    reps, no_reps = squat.check_squat()
->>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
     print(reps, no_reps)
 
 
 if __name__ == "__main__":
     main()
+
