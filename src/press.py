@@ -27,7 +27,10 @@ class press:
         self.no_reps = 0
         self.json_reader.get_number_of_files()
 
+<<<<<<< HEAD
     #  for refactoring choose side before doing everything else
+=======
+>>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
     def choose_side(self):
         pass
 
@@ -69,6 +72,7 @@ class press:
 
             return knee_position_right if knee_position_right != 0 else knee_position_left
 
+<<<<<<< HEAD
     def get_wrist_value(self, iteration):
         while True:
             wrist_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_WRIST_VALUE,))
@@ -80,6 +84,8 @@ class press:
 
             return wrist_position_right if wrist_position_right != 0 else wrist_position_left
 
+=======
+>>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
     def get_shoulder_value(self, iteration):
         while True:
             shoulder_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_SHOULDER_VALUE,))
@@ -91,6 +97,7 @@ class press:
 
             return shoulder_position_right if shoulder_position_right != 0 else shoulder_position_left
 
+<<<<<<< HEAD
     def get_hip_value(self, iteration):
         while True:
             hip_position, trust = self.json_reader.get_values(iteration, (HIP_VALUE,))
@@ -99,6 +106,8 @@ class press:
                 continue
             return hip_position
 
+=======
+>>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
     def check_if_still_going_down(self, wrist_y_position, iteration):
         bigger_points = 0
         # check next 5 frames
@@ -125,6 +134,7 @@ class press:
 
         return False
 
+<<<<<<< HEAD
     def check_exercise(self):
         last_value_x = 0
         last_value_y = 0
@@ -179,3 +189,7 @@ class press:
 
         return self.correct_reps, self.no_reps
 
+=======
+    def check_press(self):
+        pass
+>>>>>>> 9eccf70e0673dc0c55a204a220f8ee9e100369f0
