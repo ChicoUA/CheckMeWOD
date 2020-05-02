@@ -160,6 +160,9 @@ def add_event(request):
 @login_required
 def profile(request):
     info = VideoSubmission.objects.filter(user_email=request.user)
-    for e in info:
-        print(str(e.video_file))
-    return render(request, 'profile.html')
+    statistics=[]
+    for stat in info:
+        video_name = str(stat.video_file).split("/")
+        statistics.append({"name":video_name[-1],"info":stat})
+    
+    return render(request, 'profile.html', {"statistics":statistics})

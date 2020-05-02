@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 
     <!-- Breadcrumb Section Begin -->
@@ -23,7 +24,7 @@
 
     <section class="profile-section classes-page spad">
         <div class="container">
-            <h2>Info</h2>
+            <h2 style="padding-bottom: 15px;">Info</h2>
             <div class="classes-page-text">
                 <div class="row">
                     <div class="">
@@ -40,19 +41,44 @@
 
     <section class="profile-section classes-page spad">
         <div class="container">
-            <h2>Statistics</h2>
+            <h2 style="padding-bottom: 15px;">Statistics</h2>
             <div class="classes-page-text">
-    
-                <div class="statistics" >
-                    <div class="statistic">
-                        
-                    </div> 
-                </div>
-                <div class="statistics" >
-                    <div class="statistic">
-                        
-                    </div> 
-                </div>
+                <table class="stat_table">
+                    <thead>
+                        <tr>
+                            <th class="column1">Video</th>
+                            <th class="column2">Exercise</th>
+                            <th class="column3">Number of Reps</th>
+                            <th class="column4">Correct Reps</th>
+                            <th class="column5">Incorrect Reps</th>
+                            <th class="column6">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in statistics %}
+                        <tr class="tr_body">         
+                            <td class="column1">
+                                {{ stat.name }}
+                            </td>
+                            <td class="column2">
+                                {{ stat.info.exercise_in_video }}
+                            </td>
+                            <td class="column3">
+                                {{ stat.info.number_reps }}
+                            </td>
+                            <td class="column4">
+                                {{ stat.info.number_correct_reps }}
+                            </td>
+                            <td class="column5">
+                                {{ stat.info.number_incorrect_reps }}
+                            </td>
+                            <td class="column6">
+                                {{ stat.info.video_status }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
         

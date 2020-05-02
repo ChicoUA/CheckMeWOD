@@ -30,14 +30,51 @@
 
 /*profile css*/
 
-.statistics .statistic{
-	display:flex;
-	margin-bottom:10px;
-	padding-bottom:10px;
-	padding-top: 40px;
+
+.stat_table thead{
+	display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.stat_table th{
+	text-align: left;
+}
+
+.stat_table tr{
+	height: 50px;
 	border-bottom:1px #eee solid
 }
 
+.column1{
+	width: 300px;
+    padding-left: 40px;
+}
+
+.column2{
+	width: 180px;
+    padding-left: 40px;
+}
+
+.column3{
+	width: 190px;
+    padding-left: 40px;
+}
+
+.column4{
+	width: 170px;
+    padding-left: 40px;
+}
+
+.column5{
+	width: 170px;
+    padding-left: 40px;
+}
+
+.column6{
+	width: 200px;
+    padding-left: 40px;
+}
 
 
 /* submit info css*/
