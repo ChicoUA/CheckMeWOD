@@ -1,7 +1,7 @@
 from django import forms
 from checkmewod import models
 from django.contrib.auth.models import User
-
+from .models import Event
 
 class RegisterForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -58,4 +58,13 @@ class DragNDropForm(forms.Form):
         model = models.VideoSubmission()
         fields = ['video_file' ]
 
-        
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+
+        widgets = {
+            'end_Date': forms.DateInput(attrs={'type':'date'}),
+            'start_Date': forms.DateInput(attrs={'type': 'date'})
+                   }
+
+        exclude=()

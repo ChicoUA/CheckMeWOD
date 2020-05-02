@@ -10,6 +10,7 @@ from checkmewod.models import MyUser
 from django.http import HttpResponse
 import json
 from django.http.response import HttpResponseRedirect
+from .forms import EventForm
 
 videocount = 0
 
@@ -143,7 +144,16 @@ def event(request):
     return render(request, 'event.html')
 
 def add_event(request):
-    return render(request, 'add-event.html')
+    form = EventForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = EventForm(request.POST or None)
+    context = {
+        'form' : form
+    }
+
+    return render(request, "add-event.html", context)
+
 
 @login_required
 def profile(request):

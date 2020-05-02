@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 
+
+
  <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb/classes-breadcrumb.jpg' %}">
         <div class="container">
@@ -22,6 +24,7 @@
 	
     <div class="main-container submit_event" style="margin-left: 600px;">
 		<h1>Submit your event!</h1>
+		<!--
 		<form action="#" method="POST" enctype="multipart/form-data">
 
 
@@ -31,25 +34,8 @@
 			</div>
 			<div class="splitted"> 
 				<input type="text" id="datepicker_start_date" name="event_info[start_date]" placeholder="Event - Start date (required)" required="" class="hasDatepicker">
-				<input type="text" name="event_info[start_time]" pattern="[0-9]?[0-9]:[0-9]{2}" class="timepick ui-timepicker-input" placeholder="Event - Start time (hh:mm, e.g. 10:00) (required)" required="" autocomplete="off">
 			</div>
 			<div class="splitted"> <input type="text" id="datepicker_end_date" name="event_info[end_date]" placeholder="Event - End date (required)" required="" class="hasDatepicker"> 
-				<input type="text" name="event_info[end_time]" pattern="[0-9]?[0-9]:[0-9]{2}" class="timepick ui-timepicker-input" placeholder="Event - End time (hh:mm, e.g. 10:00) (required)" required="" autocomplete="off">
-			</div>
-			<div class="splitted"> 
-				<select name="event_info[type]" required="">
-					<option value="" class="placeholder">Event - Type (required)</option>
-					<option value="Throwdowns">Throwdowns</option>
-					<option value="Obstacle runs">Obstacle runs</option>
-					<option value="Weightlifting">Weightlifting</option>
-					<option value="Sanctional">Sanctional</option>
-					<option value="Exhibitions">Exhibitions</option>
-					<option value="Strongman">Strongman</option>
-					<option value="Seminars">Seminars</option>
-					<option value="Online Competition">Online Competition</option>
-					<option value="Others">Others</option> 
-				</select> 
-				<input type="url" name="event_info[registration_page]" placeholder="Event - Registration page url">
 			</div>
 
 
@@ -57,8 +43,7 @@
 			<h2>Event location</h2>
 			<div class="splitted"> 
 				<input type="text" name="event_info[location]" placeholder="Event - Location (required)" required=""> 
-				<input type="text" name="event_info[street]" placeholder="Event - Street (required)" required="">
-			</div>
+				</div>
 			<div class="splitted"> 
 				<select name="event_info[country]" required="">
 					<option value="" class="placeholder">Event - Country (required)</option>
@@ -308,148 +293,18 @@
 					<option value="Zambia">Zambia</option>
 					<option value="Zimbabwe">Zimbabwe</option> 
 				</select> 
-				<input type="text" name="event_info[city]" placeholder="Event - City (required)" required="">
-			</div>
-			<div class="full"> <input type="text" name="event_info[zip]" placeholder="Event - Zip code (required)" required="">
-			</div>
-
-
+				</div>
 
 			<h2>Event organizer</h2>
 			<div class="splitted"> 
 				<input type="text" name="event_info[organizer_name]" placeholder="Organizer - Name (required)" required=""> 
 				<input type="url" name="event_info[organizer_website]" placeholder="Organizer - Website">
 			</div>
-			<div class="splitted"> 
-				<input type="text" name="event_info[organizer_email]" placeholder="Organizer - Mail"> 
-				<input type="text" name="event_info[organizer_phone]" placeholder="Organizer - Phone">
-			</div>
-
 
 
 			<h2>Price</h2>
 			<div class="splitted"> 
-				<input type="number" name="event_info[athlete_price]" min="0" max="10000" step="0.25" placeholder="Price for athletes (required)" required=""> 
-				<input type="number" name="event_info[spectator_price]" min="0" max="10000" step="0.25" placeholder="Price for spectators">
-			</div>
-			<div class="full"> 
-				<select name="event_info[price_currency]" required="">			
-					<option value="" disabled="" selected="" class="placeholder">Currency (required)</option>
-					<option value="ALL">Albania Lek</option>
-					<option value="AFN">Afghanistan Afghani</option>
-					<option value="ARS">Argentina Peso</option>
-					<option value="AWG">Aruba Guilder</option>
-					<option value="AUD">Australia Dollar</option>
-					<option value="AZN">Azerbaijan New Manat</option>
-					<option value="BSD">Bahamas Dollar</option>
-					<option value="BBD">Barbados Dollar</option>
-					<option value="BDT">Bangladeshi taka</option>
-					<option value="BYR">Belarus Ruble</option>
-					<option value="BZD">Belize Dollar</option>
-					<option value="BMD">Bermuda Dollar</option>
-					<option value="BOB">Bolivia Boliviano</option>
-					<option value="BAM">Bosnia and Herzegovina Convertible Marka</option>
-					<option value="BWP">Botswana Pula</option>
-					<option value="BGN">Bulgaria Lev</option>
-					<option value="BRL">Brazil Real</option>
-					<option value="BND">Brunei Darussalam Dollar</option>
-					<option value="KHR">Cambodia Riel</option>
-					<option value="CAD">Canada Dollar</option>
-					<option value="KYD">Cayman Islands Dollar</option>
-					<option value="CLP">Chile Peso</option>
-					<option value="CNY">China Yuan Renminbi</option>
-					<option value="COP">Colombia Peso</option>
-					<option value="CRC">Costa Rica Colon</option>
-					<option value="HRK">Croatia Kuna</option>
-					<option value="CUP">Cuba Peso</option>
-					<option value="CZK">Czech Republic Koruna</option>
-					<option value="DKK">Denmark Krone</option>
-					<option value="DOP">Dominican Republic Peso</option>
-					<option value="XCD">East Caribbean Dollar</option>
-					<option value="EGP">Egypt Pound</option>
-					<option value="SVC">El Salvador Colon</option>
-					<option value="EEK">Estonia Kroon</option>
-					<option value="EUR">European Euro</option>
-					<option value="FKP">Falkland Islands (Malvinas) Pound</option>
-					<option value="FJD">Fiji Dollar</option>
-					<option value="GHC">Ghana Cedis</option>
-					<option value="GIP">Gibraltar Pound</option>
-					<option value="GTQ">Guatemala Quetzal</option>
-					<option value="GGP">Guernsey Pound</option>
-					<option value="GYD">Guyana Dollar</option>
-					<option value="HNL">Honduras Lempira</option>
-					<option value="HKD">Hong Kong Dollar</option>
-					<option value="HUF">Hungary Forint</option>
-					<option value="ISK">Iceland Krona</option>
-					<option value="INR">India Rupee</option>
-					<option value="IDR">Indonesia Rupiah</option>
-					<option value="IRR">Iran Rial</option>
-					<option value="IMP">Isle of Man Pound</option>
-					<option value="ILS">Israel Shekel</option>
-					<option value="JMD">Jamaica Dollar</option>
-					<option value="JPY">Japan Yen</option>
-					<option value="JEP">Jersey Pound</option>
-					<option value="KZT">Kazakhstan Tenge</option>
-					<option value="KPW">Korea (North) Won</option>
-					<option value="KRW">Korea (South) Won</option>
-					<option value="KGS">Kyrgyzstan Som</option>
-					<option value="LAK">Laos Kip</option>
-					<option value="LVL">Latvia Lat</option>
-					<option value="LBP">Lebanon Pound</option>
-					<option value="LRD">Liberia Dollar</option>
-					<option value="LTL">Lithuania Litas</option>
-					<option value="MKD">Macedonia Denar</option>
-					<option value="MYR">Malaysia Ringgit</option>
-					<option value="MUR">Mauritius Rupee</option>
-					<option value="MXN">Mexico Peso</option>
-					<option value="MNT">Mongolia Tughrik</option>
-					<option value="MZN">Mozambique Metical</option>
-					<option value="NAD">Namibia Dollar</option>
-					<option value="NPR">Nepal Rupee</option>
-					<option value="ANG">Netherlands Antilles Guilder</option>
-					<option value="NZD">New Zealand Dollar</option>
-					<option value="NIO">Nicaragua Cordoba</option>
-					<option value="NGN">Nigeria Naira</option>
-					<option value="NOK">Norway Krone</option>
-					<option value="OMR">Oman Rial</option>
-					<option value="PKR">Pakistan Rupee</option>
-					<option value="PAB">Panama Balboa</option>
-					<option value="PYG">Paraguay Guarani</option>
-					<option value="PEN">Peru Nuevo Sol</option>
-					<option value="PHP">Philippines Peso</option>
-					<option value="PLN">Poland Zloty</option>
-					<option value="QAR">Qatar Riyal</option>
-					<option value="RON">Romania New Leu</option>
-					<option value="RUB">Russia Ruble</option>
-					<option value="SHP">Saint Helena Pound</option>
-					<option value="SAR">Saudi Arabia Riyal</option>
-					<option value="RSD">Serbia Dinar</option>
-					<option value="SCR">Seychelles Rupee</option>
-					<option value="SGD">Singapore Dollar</option>
-					<option value="SBD">Solomon Islands Dollar</option>
-					<option value="SOS">Somalia Shilling</option>
-					<option value="ZAR">South Africa Rand</option>
-					<option value="LKR">Sri Lanka Rupee</option>
-					<option value="SEK">Sweden Krona</option>
-					<option value="CHF">Switzerland Franc</option>
-					<option value="SRD">Suriname Dollar</option>
-					<option value="SYP">Syria Pound</option>
-					<option value="TWD">Taiwan New Dollar</option>
-					<option value="THB">Thailand Baht</option>
-					<option value="TTD">Trinidad and Tobago Dollar</option>
-					<option value="TRY">Turkey Lira</option>
-					<option value="TRL">Turkey Lira</option>
-					<option value="TVD">Tuvalu Dollar</option>
-					<option value="UAH">Ukraine Hryvna</option>
-					<option value="GBP">United Kingdom Pound</option>
-					<option value="USD">United States Dollar</option>
-					<option value="UYU">Uruguay Peso</option>
-					<option value="UZS">Uzbekistan Som</option>
-					<option value="VEF">Venezuela Bolivar</option>
-					<option value="VND">Viet Nam Dong</option>
-					<option value="YER">Yemen Rial</option>
-					<option value="ZWD">Zimbabwe Dollar</option> 
-				</select>
+				<input type="number" name="event_info[athlete_price]" min="0" max="10000" step="0.25" placeholder="Price for athletes (required)" required="">
 			</div>
 
 
@@ -468,6 +323,13 @@
 			<h2><div class="full submit">  <button type="event" class="login-btn">Submit your event!</button></div></div>
 			
 		</form>
-		<button type="submit" class="login-btn">Login</button>
+		-->
+
+		<form method="POST"> {% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value='Save' />
+		</form>
 	</div>
+
+
 {%  endblock %}

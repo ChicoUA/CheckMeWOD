@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_countries',
     'checkmewod',
 ]
 
@@ -129,3 +130,6 @@ STATIC_URL = '/static/'
 LOGIN_URL="login"
 LOGIN_REDIRECT_URL="checkmewod"
 LOGOUT_REDIRECT_URL="checkmewod"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
