@@ -11,14 +11,10 @@ class json_reader:
     def get_number_of_files(self):
         path, dirs, files = next(os.walk(self.output_folder))
         self.number_of_files = len(files)
-        
 
     def get_values(self, iteration, points):
-        
         if iteration <= self.number_of_files:
-            
             filename = self.output_folder + "frame_number_" + str(iteration) + ".json"
-            
             trust = True
             values = 0
             with open(filename) as json_file:
@@ -31,7 +27,6 @@ class json_reader:
                     if data[2] == 0:
                         trust = False
                     values = data
-                    
                 except Exception:
                     trust = False
 

@@ -1,5 +1,5 @@
-from checkmewod.video_evaluation_src.utils import check_close
-from checkmewod.video_evaluation_src.json_reader import *
+from utils import check_close
+from json_reader import *
 import logging
 
 HIP_VALUE = 8
@@ -122,7 +122,6 @@ class front_squat:
         new_value_y = 0
         going_down = True  # movement starts by going down
         for i in range(0, self.json_reader.number_of_files + 1):
-            print(i)
             value, trust = self.json_reader.get_values(i, (HIP_VALUE,))
 
             if self.counted_reps == self.reps:
