@@ -14,6 +14,8 @@ from django.http.response import HttpResponseRedirect
 from .forms import EventForm, ContactForm
 from website import settings
 
+from django.contrib import messages
+
 videocount = 0
 
 
@@ -42,10 +44,12 @@ def contact(request):
             your_email = form.cleaned_data['your_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message + your_email, your_email, [settings.EMAIL_HOST_USER])
+                send_mail(subject, "[Message sent by: " + your_email + "]\n\n" + message, your_email, [settings.EMAIL_HOST_USER])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
-            return HttpResponse('Success! Thank you for your message.')
+            messages.success(request, 'Thank you for your message.')
+            return HttpResponseRedirect('')
+            #return HttpResponse('Success! Thank you for your message.')
     else:
         form = ContactForm()
     return render(request, "contact.html", {'form': form})

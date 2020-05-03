@@ -23,7 +23,17 @@
 
     <!-- Contact Section Begin -->
     <section class="contact-section spad">
+
         <div class="container">
+            <div class="row">
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+            </div>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact-info">
