@@ -29,7 +29,7 @@
                 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <div class="alert alert-success"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    <div class="alert alert-success" role="alert"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
     {% endfor %}
 </ul>
 {% endif %}
@@ -73,6 +73,8 @@
                     </div>
                 </div>
 
+            {% empty ½}
+                <div class="alert alert-light" role="alert">There are no upcoming events</div>
             {% endfor %}
             </div>
             <!--
