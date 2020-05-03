@@ -11,22 +11,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='Event',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('start_Date', models.DateField()),
-                ('end_Date', models.DateField()),
-                ('city', models.CharField(max_length=20)),
-                ('country', django_countries.fields.CountryField(max_length=2)),
-                ('price', models.CharField(max_length=10)),
-                ('short_Description', models.TextField()),
-                ('organizer', models.CharField(max_length=20)),
-                ('event_URL', models.URLField(default='')),
-                ('event_Logo', models.ImageField(blank=True, null=True, upload_to='images/event_logos/')),
-            ],
-        ),
         migrations.DeleteModel(
             name='Events',
         ),
