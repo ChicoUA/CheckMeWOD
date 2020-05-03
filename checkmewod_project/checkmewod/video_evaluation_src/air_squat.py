@@ -1,4 +1,4 @@
-from utils import check_close, check_close2
+from utils import check_close, check_close2, check_close3
 from json_reader import *
 import logging
 
@@ -24,7 +24,7 @@ class air_squat:
         self.json_reader.get_number_of_files()
 
     def check_down_position(self, hip_y_position, knee_y_position):
-        if hip_y_position < knee_y_position:
+        if hip_y_position < knee_y_position or check_close3(hip_y_position, knee_y_position):
             self.logger.debug("Good down position: " + str(hip_y_position) + " - " + str(knee_y_position))
             return True
         else:
@@ -46,7 +46,7 @@ class air_squat:
         # check next 5 frames
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (HIP_VALUE,))
-            if point[1] >= hip_y_position:
+            if point[1] <= hip_y_position:
                 bigger_points += 1
 
         if bigger_points >= 4:
@@ -59,7 +59,7 @@ class air_squat:
         # check next 5 frames
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (HIP_VALUE,))
-            if point[1] <= hip_y_position:
+            if point[1] >= hip_y_position:
                 lower_points += 1
 
         if lower_points >= 4:
@@ -71,19 +71,20 @@ class air_squat:
         while True:
             knee_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_KNEE_VALUE,))
             knee_position_left, trust = self.json_reader.get_values(iteration, (LEFT_KNEE_VALUE,))
-
-            if knee_position_left == knee_position_right == 0:
+            if knee_position_left[0] == knee_position_right[0] == 0:
                 iteration -= 1
-                continue
 
-            return knee_position_right if knee_position_right != 0 else knee_position_left
+            elif knee_position_left[0] != 0 or knee_position_right[0] != 0:
+                break
+
+        return knee_position_right if knee_position_right != 0 else knee_position_left
 
     def get_shoulder_value(self, iteration):
         while True:
             shoulder_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_SHOULDER_VALUE,))
             shoulder_position_left, trust = self.json_reader.get_values(iteration, (LEFT_SHOULDER_VALUE,))
 
-            if shoulder_position_left == shoulder_position_right == 0:
+            if shoulder_position_left[0] == shoulder_position_right[0] == 0:
                 iteration -= 1
                 continue
 
@@ -130,6 +131,7 @@ class air_squat:
                     knee_x_position = self.get_knee_value(i)[0]
                     shoulder_x_position = self.get_shoulder_value(i)[0]
                     self.counted_reps += 1
+                    print(last_value_x, shoulder_x_position, knee_x_position)
                     if self.check_up_position(shoulder_x_position, last_value_x, knee_x_position) and not was_no_rep:
                         print("fez bem cima")
                         self.correct_reps += 1
@@ -145,7 +147,6 @@ class air_squat:
 
             last_value_y = value[1]
             last_value_x = value[0]
-            was_no_rep = False
 
         return self.correct_reps, self.no_reps, list_of_frames
 
