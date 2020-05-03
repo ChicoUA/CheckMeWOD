@@ -7,13 +7,12 @@ from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
 from django.core.mail import send_mail, BadHeaderError
 
 # Create your views here.
-from checkmewod.models import MyUser
+from .models import Event
 from django.http import HttpResponse
 import json
 from django.http.response import HttpResponseRedirect
 from .forms import EventForm, ContactForm
 from website import settings
-
 from django.contrib import messages
 
 videocount = 0
@@ -34,9 +33,14 @@ def about(request):
     }
     return render(request, 'about-us.html')
 
+def event(request):
+    context = {
+        'events': Event.objects.all()
+    }
+    return render(request, 'event.html', context)
+
 
 def contact(request):
-    form = ContactForm()
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -53,6 +57,21 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, "contact.html", {'form': form})
+
+
+def add_event(request):
+    form = EventForm()
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event submitted.')
+            return HttpResponseRedirect("/checkmewod/event")
+    else:
+        context = {
+            'form' : form
+        }
+        return render(request, "add-event.html", context)
 
 
 def log_in(request):
@@ -160,19 +179,6 @@ def classes(request):
         return render(request, 'submit.html')
 
 
-def event(request):
-    return render(request, 'event.html')
-
-def add_event(request):
-    form = EventForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form = EventForm(request.POST or None)
-    context = {
-        'form' : form
-    }
-
-    return render(request, "add-event.html", context)
 
 
 @login_required

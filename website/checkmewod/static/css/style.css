@@ -41,9 +41,8 @@
 
 .events .event{
 	display:flex;
-	margin-bottom:10px;
-	padding-bottom:10px;
-	padding-top: 40px;
+	padding-bottom:20px;
+	padding-top: 20px;
 	border-bottom:1px #eee solid
 }
 
@@ -119,16 +118,16 @@
 	margin-top:5px;
 }
 
-.events .event .info .meta .city, .events .event .info .meta .location{
+.events .event .info .meta .city, .events .event .info .meta .location, .events .event .info .meta .group{
 	display:flex;
 	align-items:center;
 }
 
-.events .event .info .meta .city::before, .events .event .info .meta .location::before{
+.events .event .info .meta .city::before, .events .event .info .meta .location::before, .events .event .info .meta .group::before{
 	margin-right:15px;
 }
 
-.events .event .info .meta .city{
+.events .event .info .meta .city, .events .event .info .meta .location{
 	margin-bottom:5px;
 }
 
@@ -144,7 +143,16 @@
 .events .event .info .meta .location::before{
 	display:block;
 	content:' ';
-	background:url("../fonts/house.svg");
+	background:url("../fonts/coins.svg");
+	background-size:contain;
+	width:24px;
+	height:24px;
+}
+
+.events .event .info .meta .group::before{
+	display:block;
+	content:' ';
+	background:url("../fonts/groups.svg");
 	background-size:contain;
 	width:24px;
 	height:24px;

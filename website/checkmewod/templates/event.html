@@ -26,6 +26,15 @@
     <section class="spad-2">
         <div class="container">
             <div class="row">
+                {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+            </div>
+            <div class="row" >
                 <div class="title">
                     <h2>Upcoming Competitions</h2>
                 </div>
@@ -34,7 +43,39 @@
                 </div>
                 
             </div>
+            <div class="events" style="padding-top:40px">
+            {% for event in events %}
 
+                <div class="event">
+                    <div class="details">
+                        <div class="day"> {{ event.start_Date|date:"d"}} </div>
+                        <div class="month"> {{ event.start_Date|date:"M"}} </div>
+                        <div class="year"> {{ event.start_Date|date:"Y"}} </div>
+
+
+                        <!--<img src="https://www.boxrox.com/wp-content/themes/boxrox/images/icons/countries/sweden.png">-->
+                        <img src="{{event.country.flag}}">
+                    </div>
+
+                    <div class="thumb">
+                        {% load static %}
+                        <img src="media/{{event.event_Logo}}" alt="">
+                    </div>
+
+                    <div class="info">
+                        <a href= {{ event.event_URL}}><h2>{{ event.name }}</h2></a>
+                        <p> {{ event.short_Description }} </p>
+                        <div class="meta">
+                            <div class="city">{{ event.city }}</div>
+                            <div class="location">{{ event.price }}</div>
+                            <div class="group">{{ event.organizer }}</div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+            </div>
+            <!--
             <div class="events" >
                 <div class="event">
                     <div class="details">
@@ -58,10 +99,8 @@
 
                         </div>
                     </div>
-                </div> 
-            </div>
+                </div>
 
-            <div class="events">
                 <div class="event">
                     <div class="details">
                         <div class="day">23 </div>
@@ -113,6 +152,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
 
     </section>
