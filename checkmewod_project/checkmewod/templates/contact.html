@@ -23,7 +23,17 @@
 
     <!-- Contact Section Begin -->
     <section class="contact-section spad">
+
         <div class="container">
+            <div class="row">
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="alert alert-success"{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+            </div>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact-info">
@@ -35,7 +45,7 @@
                                 </div>
                                 <div class="cw-text">
                                     <h5>Our Location</h5>
-                                    <p>60-49 Road 11378 New York</p>
+                                    <p>Aveiro, Portugal</p>
                                 </div>
                             </div>
                             <div class="ca-widget">
@@ -44,7 +54,7 @@
                                 </div>
                                 <div class="cw-text">
                                     <h5>Phone:</h5>
-                                    <p>+65 11.188.888</p>
+                                    <p>+351 000 000 000</p>
                                 </div>
                             </div>
                             <div class="ca-widget">
@@ -53,7 +63,7 @@
                                 </div>
                                 <div class="cw-text">
                                     <h5>Mail</h5>
-                                    <p>hellocolorlib@ gmail.com</p>
+                                    <p>checkmewod@gmail.com</p>
                                 </div>
                             </div>
                         </div>
@@ -61,23 +71,18 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="contact-form">
-                        <h4>Leave A Comment</h4>
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Your name">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Your email">
-                                </div>
-                                <div class="col-lg-12">
-                                    <textarea placeholder="Your messages"></textarea>
+                        <h4>Leave A Comment {{ message_name }}</h4>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
+                                <div class="form-actions">
                                     <button type="submit">Send Message</button>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
     </section>

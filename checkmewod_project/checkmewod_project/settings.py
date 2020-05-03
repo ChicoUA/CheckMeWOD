@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_countries',
     'checkmewod',
     'openpose',
 ]
@@ -134,3 +135,13 @@ STATIC_URL = '/static/'
 LOGIN_URL="login"
 LOGIN_REDIRECT_URL="checkmewod"
 LOGOUT_REDIRECT_URL="checkmewod"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Email Settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'checkmewod@gmail.com'
+EMAIL_HOST_PASSWORD = 'checkmewod2020'
+EMAIL_USE_TLS = True

@@ -8,13 +8,19 @@ from django.shortcuts import render, redirect
 import uuid
 
 from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
+
 from checkmewod.tasks import evaluate_video
 
-# Create your views here.
-from checkmewod.models import VideoSubmission
+from checkmewod.models import VideoSubmission, Event
+
+from django.core.mail import send_mail, BadHeaderError
+
 from django.http import HttpResponse
 import json
 from django.http.response import HttpResponseRedirect
+from .forms import EventForm, ContactForm
+from checkmewod_project import settings
+from django.contrib import messages
 
 videocount = 0
 
@@ -34,9 +40,45 @@ def about(request):
     }
     return render(request, 'about-us.html')
 
+def event(request):
+    context = {
+        'events': Event.objects.all()
+    }
+    return render(request, 'event.html', context)
+
 
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            your_email = form.cleaned_data['your_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, "[Message sent by: " + your_email + "]\n\n" + message, your_email, [settings.EMAIL_HOST_USER])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            messages.success(request, 'Thank you for your message.')
+            return HttpResponseRedirect('')
+            #return HttpResponse('Success! Thank you for your message.')
+    else:
+        form = ContactForm()
+    return render(request, "contact.html", {'form': form})
+
+
+def add_event(request):
+    form = EventForm()
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event submitted.')
+            return HttpResponseRedirect("/checkmewod/event")
+    else:
+        context = {
+            'form' : form
+        }
+        return render(request, "add-event.html", context)
 
 
 def log_in(request):
@@ -151,11 +193,7 @@ def video_sub(request):
         return render(request, 'submit.html')
 
 
-def event(request):
-    return render(request, 'event.html')
 
-def add_event(request):
-    return render(request, 'add-event.html')
 
 @login_required
 def profile(request):

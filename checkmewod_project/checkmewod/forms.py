@@ -1,7 +1,7 @@
 from django import forms
 from checkmewod import models
 from django.contrib.auth.models import User
-
+from .models import Event
 
 class RegisterForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -58,23 +58,18 @@ class DragNDropForm(forms.Form):
         model = models.VideoSubmission()
         fields = ['video_file', 'exercise_in_video', 'number_reps', 'user_email' ]
 
-    
-class EventsForm(forms.Form):
+class EventForm(forms.ModelForm):
     class Meta:
-        model = models.Events()
-        fields = [
-            'name',
-            'start_date',
-            'end_date',
-            'start_time',
-            'end_time',
-            'registration_url',
-            'website_url',
-            'country',
-            'location',
-            'street',
-            'zipcode',
-            'price',
-            'description',
-            'logo'
-        ]
+        model = Event
+
+        widgets = {
+            'end_Date': forms.DateInput(attrs={'type':'date'}),
+            'start_Date': forms.DateInput(attrs={'type': 'date'})
+                   }
+
+        exclude=()
+
+class ContactForm(forms.Form):
+    your_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)

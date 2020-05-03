@@ -1,3 +1,6 @@
+{% load user_tags %}
+
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -82,7 +85,9 @@
                     </ul>
                 </nav>
                 {% if user.is_authenticated %}
+                {% if not user|is_group:"Affiliate" %} 
                     <a class="affiliate-btn" href="{% url 'contact' %}" style="color:#fff;">I'm an affiliate</a>
+                {% endif %}
                     <div class="user-dropdown">
                         <a onclick="userDropdown()" class="primary-btn dropbtn">{{ user.get_username }}
                             <i class="fa fa-caret-down ml4"></i>
