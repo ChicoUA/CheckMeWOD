@@ -1,5 +1,5 @@
-from utils import check_close
-from json_reader import *
+from checkmewod.video_evaluation_src.utils import check_close
+from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
 LEFT_WRIST_VALUE = 7

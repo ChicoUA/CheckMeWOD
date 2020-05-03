@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load user_tags %}
 {% block content %}
 
  <!-- Breadcrumb Section Begin -->
@@ -29,9 +30,11 @@
                 <div class="title">
                     <h2>Upcoming Competitions</h2>
                 </div>
+                {% if user|is_group:"Affiliate" %} 
                 <div class="add-event">
                     <a href="{% url 'event2' %}" class="primary-btn add-event-button">Submit Your Event</a>
                 </div>
+                {% endif %} 
                 
             </div>
 

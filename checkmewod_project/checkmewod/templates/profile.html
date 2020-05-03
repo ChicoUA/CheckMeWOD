@@ -36,8 +36,10 @@
                 </div>
             </div>
         </div>
-        
     </section>
+
+    
+
 
     <section class="profile-section classes-page spad">
         <div class="container">
@@ -58,7 +60,9 @@
                         {% for stat in statistics %}
                         <tr class="tr_body">         
                             <td class="column1">
-                                {{ stat.name }}
+                                <a  href="{% static 'uploaded_files/air_squat.mp4' %}" class="video-popup">{{ stat.name }}
+                                    
+                                </a>
                             </td>
                             <td class="column2">
                                 {{ stat.info.exercise_in_video }}
@@ -81,7 +85,6 @@
                 </table>
             </div>
         </div>
-        
     </section>
 
 {% endblock %}
