@@ -19,4 +19,4 @@ class Event(models.Model):
     price = models.CharField(max_length=10)
     short_Description = models.TextField()
     organizer = models.CharField(max_length=20)
-    event_Logo = models.ImageField(null=True, blank=True)
+    event_Logo = models.ImageField(upload_to = 'pic_folder/', null=True, blank=True)

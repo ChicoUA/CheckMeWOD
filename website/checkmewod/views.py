@@ -4,13 +4,15 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
+from django.core.mail import send_mail, BadHeaderError
 
 # Create your views here.
 from checkmewod.models import MyUser
 from django.http import HttpResponse
 import json
 from django.http.response import HttpResponseRedirect
-from .forms import EventForm
+from .forms import EventForm, ContactForm
+from website import settings
 
 videocount = 0
 
@@ -32,7 +34,21 @@ def about(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    form = ContactForm()
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            your_email = form.cleaned_data['your_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message + your_email, your_email, [settings.EMAIL_HOST_USER])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return HttpResponse('Success! Thank you for your message.')
+    else:
+        form = ContactForm()
+    return render(request, "contact.html", {'form': form})
 
 
 def log_in(request):
