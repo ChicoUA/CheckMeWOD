@@ -8,7 +8,7 @@ from django.db.models.functions import ExtractDay, ExtractMonth, ExtractYear
 
 class VideoSubmission(models.Model):
     video_id = models.TextField(null=True)
-    video_file = models.FileField(upload_to='checkmewod/static/uploaded_files/', null=True, verbose_name="")
+    video_file = models.FileField(upload_to='checkmewod/static/media/videos/uploaded_files/', null=True, verbose_name="")
     exercise_in_video = models.TextField(null=True)
     number_reps = models.TextField(null=True)
     number_correct_reps = models.TextField(null=True)
@@ -27,7 +27,7 @@ class Event(models.Model):
     short_Description = models.TextField()
     organizer = models.CharField(max_length=20)
     event_URL = models.URLField(null=False, default='')
-    event_Logo = models.ImageField(upload_to = 'images/event_logos/', null=True, blank=True)
+    event_Logo = models.ImageField(upload_to = 'checkmewod/static/media/images/event_logos/', null=True, blank=True)
 
     def extract(self, element, date=start_Date):
         if element == 'day':

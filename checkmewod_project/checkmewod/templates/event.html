@@ -51,27 +51,27 @@
 
                 <div class="event">
                     <div class="details">
-                        <div class="day"> {{ event.start_Date|date:"d"}} </div>
-                        <div class="month"> {{ event.start_Date|date:"M"}} </div>
-                        <div class="year"> {{ event.start_Date|date:"Y"}} </div>
+                        <div class="day"> {{ event.info.start_Date|date:"d"}} </div>
+                        <div class="month"> {{ event.info.start_Date|date:"M"}} </div>
+                        <div class="year"> {{ event.info.start_Date|date:"Y"}} </div>
 
 
                         <!--<img src="https://www.boxrox.com/wp-content/themes/boxrox/images/icons/countries/sweden.png">-->
-                        <img src="{{event.country.flag}}">
+                        <img src="{{event.info.country.flag}}">
                     </div>
 
                     <div class="thumb">
-                        {% load static %}
-                        <img src="media/{{event.event_Logo}}" alt="">
+                        
+                        <img src="{{event.logo}}" alt="">
                     </div>
 
                     <div class="info">
-                        <a href= {{ event.event_URL}}><h2>{{ event.name }}</h2></a>
-                        <p> {{ event.short_Description }} </p>
+                        <a href="{{ event.event_URL}}"><h2>{{ event.info.name }}</h2></a>
+                        <p> {{ event.info.short_Description }} </p>
                         <div class="meta">
-                            <div class="city">{{ event.city }}</div>
-                            <div class="location">{{ event.price }}</div>
-                            <div class="group">{{ event.organizer }}</div>
+                            <div class="city">{{ event.info.city }}</div>
+                            <div class="location">{{ event.info.price }}</div>
+                            <div class="group">{{ event.info.organizer }}</div>
                         </div>
                     </div>
                 </div>

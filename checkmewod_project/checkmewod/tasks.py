@@ -8,8 +8,30 @@ from checkmewod.video_evaluation_src.front_squat import front_squat
 from checkmewod.video_evaluation_src.press import press
 from checkmewod.video_evaluation_src.pull_up import pull_up
 from checkmewod.video_evaluation_src.push_up import push_up
+from django.conf import settings
+from django.core.mail import send_mail
+from checkmewod_project import settings
 import os, shutil
 from moviepy.editor import *
+
+
+@shared_task
+def send_email(id):
+    info = VideoSubmission.objects.get(video_id=id)
+    video_name = str(info.video_file).split("/")
+
+    print(settings.EMAIL_HOST_PASSWORD)
+
+    subject = 'Video Submission results'
+    from_ = 'checkmewod@gmail.com'
+    to_ = [str(info.user_email.email)]
+
+    message = 'Hi ' + str(info.user_email.first_name) + ', \n\nYou recently submitted a video by the name of ' + video_name[-1] + ' where you were performing ' + str(info.exercise_in_video) + ' and executed ' + str(info.number_reps) + ' repetitions. Your results just came out and are the following:\n \
+        ' + str(info.number_correct_reps) + ' correct repetitions \n \
+        ' + str(info.number_incorrect_reps) + ' incorrect repetitions \n\nYou can visit your profile and check the corresponding video to see which repetitions you failed and which you passed. \n\nBest Regards, \nThe CheckMeWOD Team'
+
+    send_mail(subject, message, from_, to_)
+
 
 @shared_task
 def border_video(frames_per_rep, id):
@@ -43,7 +65,7 @@ def border_video(frames_per_rep, id):
         cnt+=1
 
     final_clip = concatenate_videoclips(list)
-    temp_location = "checkmewod/static/uploaded_files/temporary.mp4"
+    temp_location = "checkmewod/static/media/videos/uploaded_files/temporary.mp4"
     final_clip.write_videofile(temp_location )
     os.remove(str(info.video_file))
     os.rename(temp_location, str(info.video_file))
@@ -98,6 +120,7 @@ def evaluate_video(id):
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
+    send_email(id)
     border_video(frames_per_rep, id)
 
 

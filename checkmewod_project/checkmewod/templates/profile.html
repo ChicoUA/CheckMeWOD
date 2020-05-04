@@ -60,7 +60,7 @@
                         {% for stat in statistics %}
                         <tr class="tr_body">         
                             <td class="column1">
-                                <a  href="{% static 'uploaded_files/air_squat.mp4' %}" class="video-popup">{{ stat.name }}
+                                <a  href="{{ stat.name }}" class="video-popup">{{ stat.video_name }}
                                     
                                 </a>
                             </td>

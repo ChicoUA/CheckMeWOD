@@ -41,8 +41,23 @@ def about(request):
     return render(request, 'about-us.html')
 
 def event(request):
+    info = Event.objects.all()
+    events = []
+    for stat in info:
+        image_name = str(stat.event_Logo).split("/")
+        stri=""
+        ctr=1
+        leng = len(image_name[1:])
+        for txt in image_name[1:]:
+            if ctr < leng:
+                stri = stri + txt + "/"
+            else:
+                stri = stri + txt
+            ctr+=1
+        print("/"+stri)
+        events.append({"logo":"/"+stri,"info":stat})
     context = {
-        'events': Event.objects.all()
+        'events': events
     }
     return render(request, 'event.html', context)
 
@@ -201,6 +216,16 @@ def profile(request):
     statistics=[]
     for stat in info:
         video_name = str(stat.video_file).split("/")
-        statistics.append({"name":video_name[-1],"info":stat})
+        stri=""
+        ctr=1
+        leng = len(video_name[1:])
+        for txt in video_name[1:]:
+            if ctr < leng:
+                stri = stri + txt + "/"
+            else:
+                stri = stri + txt
+            ctr+=1
+        print("/"+stri)
+        statistics.append({"name":"/"+stri, "video_name":video_name[-1], "info":stat})
     
     return render(request, 'profile.html', {"statistics":statistics})

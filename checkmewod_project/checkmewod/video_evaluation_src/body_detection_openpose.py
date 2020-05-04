@@ -15,7 +15,6 @@ def body_detect(video):
         # Import Openpose (Windows/Ubuntu/OSX)
         dir_path = os.path.dirname(os.path.realpath(__file__))
         try:
-            
             # Change these variables to point to the correct folder (Release/x64 etc.)
             sys.path.append('/home/daniel/openpose/build/python/');
             
