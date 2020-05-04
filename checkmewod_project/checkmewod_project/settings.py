@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'checkmewod_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'checkmewod_db',
-        'USER': 'daniel',
-        'PASSWORD': 'projetoinformatica',
+        'NAME': 'checkmewod',
+        'USER': 'myadmin',
+        'PASSWORD': 'wod2020',
         'HOST': 'localhost',
         'PORT': '',
     }
