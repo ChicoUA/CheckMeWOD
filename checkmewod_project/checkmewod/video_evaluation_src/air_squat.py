@@ -49,7 +49,9 @@ class air_squat:
             if point[1] <= hip_y_position:
                 bigger_points += 1
 
-        if bigger_points >= 4:
+            hip_y_position = point[1]
+
+        if bigger_points >= 3:
             return True
 
         return False
@@ -62,7 +64,9 @@ class air_squat:
             if point[1] >= hip_y_position:
                 lower_points += 1
 
-        if lower_points >= 4:
+            hip_y_position = point[1]
+
+        if lower_points >= 3:
             return True
 
         return False
@@ -96,8 +100,10 @@ class air_squat:
         last_value_x = 0
         last_value_y = 0
         new_value_y = 0
-        going_down = True  # movement starts by going down
-        for i in range(0, self.json_reader.number_of_files + 1):
+        first_rep_detected = False
+        first_rep_y_value = 0
+        going_down = False  # movement starts by going down
+        for i in range(0, self.json_reader.number_of_files):
             value, trust = self.json_reader.get_values(i, (HIP_VALUE,))
 
             if self.counted_reps == self.reps:
@@ -113,37 +119,43 @@ class air_squat:
 
             new_value_y = value[1]
 
-            if going_down and last_value_y < new_value_y and not check_close(new_value_y, last_value_y):
-                if not self.check_if_still_going_down(new_value_y, i):
+            if not going_down and last_value_y < new_value_y:
+                if first_rep_detected is True and new_value_y < first_rep_y_value + 50:
+                    pass
+
+                elif not self.check_if_still_going_up(new_value_y, i):
                     knee_y_position = self.get_knee_value(i)[1]
                     if not self.check_down_position(last_value_y, knee_y_position):
-                        print("fez mal baixo")
+                        print("fez mal baixo ", i)
                         # self.correct_reps += 1
                         was_no_rep = True
                     else:
-                        print("fez bem baixo")
+                        print("fez bem baixo ", i, last_value_y, new_value_y)
                         was_no_rep = False
 
-                    going_down = False
+                    going_down = True
 
-            elif not going_down and last_value_y > new_value_y and not check_close(last_value_y, new_value_y):
-                if not self.check_if_still_going_up(new_value_y, i):
+            elif going_down and last_value_y > new_value_y:
+                if not self.check_if_still_going_down(new_value_y, i):
                     knee_x_position = self.get_knee_value(i)[0]
                     shoulder_x_position = self.get_shoulder_value(i)[0]
                     self.counted_reps += 1
                     print(last_value_x, shoulder_x_position, knee_x_position)
+                    if first_rep_detected is False:
+                        first_rep_detected = True
+                        first_rep_y_value = last_value_y
                     if self.check_up_position(shoulder_x_position, last_value_x, knee_x_position) and not was_no_rep:
-                        print("fez bem cima")
+                        print("fez bem cima ", i, first_rep_y_value)
                         self.correct_reps += 1
                         list_of_frames[i] = "rep"
                     else:
-                        print("fez mal cima")
+                        print("fez mal cima ", i)
                         self.no_reps += 1
                         list_of_frames[i] = "no rep"
                         #if self.no_reps + self.correct_reps == self.counted_reps:
                             #self.no_reps -= 1
 
-                    going_down = True
+                    going_down = False
 
             last_value_y = value[1]
             last_value_x = value[0]
