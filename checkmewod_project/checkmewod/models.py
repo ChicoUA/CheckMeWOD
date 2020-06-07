@@ -27,17 +27,4 @@ class Event(models.Model):
     short_Description = models.TextField()
     organizer = models.CharField(max_length=20)
     event_URL = models.URLField(null=False, default='')
-<<<<<<< HEAD
-    event_Logo = models.ImageField(upload_to = 'checkmewod/static/media/images/event_logos/', null=True, blank=True)
-
-    def extract(self, element, date=start_Date):
-        if element == 'day':
-            return ExtractDay(date)
-        elif element == 'month':
-            return ExtractMonth(date)
-        elif element == 'year':
-            return ExtractYear(date)
-    
-=======
-    event_Logo = models.ImageField(upload_to='images/event_logos/', null=True, blank=True)
->>>>>>> 69e985234e6fbdaa119bab6f3101186db8ca4b8c
+    event_Logo = models.ImageField(upload_to='checkmewod/static/media/images/event_logos/', null=True, blank=True)

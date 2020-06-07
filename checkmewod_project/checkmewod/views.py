@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 
 import uuid
 
-from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm
+from checkmewod.forms import RegisterForm, LoginForm, DragNDropForm, SearchForm
 
 from checkmewod.tasks import evaluate_video
 
@@ -40,6 +40,7 @@ def about(request):
     }
     return render(request, 'about-us.html')
 
+
 def event(request):
     info = Event.objects.all()
     events = []
@@ -61,6 +62,52 @@ def event(request):
     }
     return render(request, 'event.html', context)
 
+'''
+def event(request):
+    info = Event.objects.all()
+    events = []
+    form = SearchForm()
+    for stat in info:
+        image_name = str(stat.event_Logo).split("/")
+        stri=""
+        ctr=1
+        leng = len(image_name[1:])
+        for txt in image_name[1:]:
+            if ctr < leng:
+                stri = stri + txt + "/"
+            else:
+                stri = stri + txt
+            ctr+=1
+        print("/"+stri)
+        events.append({"logo": "/"+stri, "info": stat})
+
+    context = {
+        'events': events,
+        'form': form
+    }
+    if request.method == 'POST':
+        info = Event.objects.all().filter(event=form['name'].value())
+        context = {
+            'events': events,
+            'form': form
+        }
+    return render(request, 'event.html', context)
+'''
+
+def add_event(request):
+    form = EventForm()
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event submitted.')
+            return HttpResponseRedirect("/checkmewod/event")
+    else:
+        context = {
+            'form' : form
+        }
+        return render(request, "add-event.html", context)
+
 
 def contact(request):
     if request.method == 'POST':
@@ -79,21 +126,6 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request, "contact.html", {'form': form})
-
-
-def add_event(request):
-    form = EventForm()
-    if request.method == 'POST':
-        form = EventForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Event submitted.')
-            return HttpResponseRedirect("/checkmewod/event")
-    else:
-        context = {
-            'form' : form
-        }
-        return render(request, "add-event.html", context)
 
 
 def log_in(request):
