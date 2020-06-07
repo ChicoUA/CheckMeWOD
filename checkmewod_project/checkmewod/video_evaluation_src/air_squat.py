@@ -24,7 +24,7 @@ class air_squat:
         self.json_reader.get_number_of_files()
 
     def check_down_position(self, hip_y_position, knee_y_position):
-        if hip_y_position < knee_y_position or check_close3(hip_y_position, knee_y_position):
+        if hip_y_position > knee_y_position or check_close3(hip_y_position, knee_y_position):
             self.logger.debug("Good down position: " + str(hip_y_position) + " - " + str(knee_y_position))
             return True
         else:
