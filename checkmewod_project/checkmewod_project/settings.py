@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_countries',
     'checkmewod',
     'openpose',
+    'crispy_forms',
 ]
 
 #Celery
