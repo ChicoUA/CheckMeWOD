@@ -1,4 +1,4 @@
-from checkmewod.video_evaluation_src.utils import check_close, check_close2
+from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close3
 from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
