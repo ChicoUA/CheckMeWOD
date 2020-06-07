@@ -16,7 +16,7 @@ logging.basicConfig(filename="air_squat.log",
                     filemode='w')
 
 
-class pull_up:
+class muscle_up:
     def __init__(self, reps, filename):
         self.logger = logging.getLogger()
         self.reps = reps
@@ -26,8 +26,8 @@ class pull_up:
         self.no_reps = 0
         self.json_reader.get_number_of_files()
 
-    def check_up_position(self, nose_position, wrist_position):
-        if nose_position < wrist_position + 10:
+    def check_up_position(self, nose_position, wrist_y_position, wrist_x_position, elbow_x_position, shoulder_x_position):
+        if nose_position < wrist_y_position + 10 and check_close(wrist_x_position, elbow_x_position) and check_close(elbow_x_position, shoulder_x_position):
             return True
 
         return False
@@ -166,8 +166,10 @@ class pull_up:
                     pass
 
                 elif not self.check_if_still_going_up(new_value_y, i):
-                    wrist_y_position = self.get_wrist_value(i)[1]
-                    if not self.check_up_position(new_value_y, wrist_y_position):
+                    wrist_position = self.get_wrist_value(i)
+                    shoulder_x_position = self.get_shoulder_value(i)[0]
+                    elbow_x_position = self.get_elbow_value(i)[0]
+                    if not self.check_up_position(new_value_y, wrist_position[1], wrist_position[0], elbow_x_position, shoulder_x_position):
                         print("fez mal cima ", i)
                         was_no_rep = True
                     else:
@@ -180,6 +182,4 @@ class pull_up:
             last_value_x = value[0]
 
         return self.correct_reps, self.no_reps, list_of_frames
-
-
 

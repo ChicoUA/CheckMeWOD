@@ -1,4 +1,4 @@
-from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close3
+from checkmewod.video_evaluation_src.utils import check_close, check_close2
 from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
@@ -136,7 +136,10 @@ class air_squat:
                     going_down = True
 
             elif going_down and last_value_y > new_value_y:
-                if not self.check_if_still_going_down(new_value_y, i):
+                if first_rep_detected is True and new_value_y > first_rep_y_value + 50:
+                    pass
+
+                elif not self.check_if_still_going_down(new_value_y, i):
                     knee_x_position = self.get_knee_value(i)[0]
                     shoulder_x_position = self.get_shoulder_value(i)[0]
                     self.counted_reps += 1

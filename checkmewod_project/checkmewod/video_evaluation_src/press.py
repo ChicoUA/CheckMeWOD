@@ -1,4 +1,4 @@
-from checkmewod.video_evaluation_src.utils import check_close
+from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close3
 from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
@@ -46,28 +46,17 @@ class press:
 
         return False
 
-    def get_knee_value(self, iteration, axis):
+    def get_knee_value(self, iteration):
         while True:
             knee_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_KNEE_VALUE,))
             knee_position_left, trust = self.json_reader.get_values(iteration, (LEFT_KNEE_VALUE,))
-
-            if knee_position_left == knee_position_right == 0:
+            if knee_position_left[0] == knee_position_right[0] == 0:
                 iteration -= 1
-                continue
 
-            if axis == "x" and knee_position_right != 0:
-                knee_position_right = knee_position_right[0]
+            elif knee_position_left[0] != 0 or knee_position_right[0] != 0:
+                break
 
-            elif axis == "x" and knee_position_left != 0:
-                knee_position_left = knee_position_left[0]
-
-            elif axis == "y" and knee_position_left != 0:
-                knee_position_left = knee_position_left[1]
-
-            else:
-                knee_position_right = knee_position_right[1]
-
-            return knee_position_right if knee_position_right != 0 else knee_position_left
+        return knee_position_right if knee_position_right != 0 else knee_position_left
 
     def get_wrist_value(self, iteration):
         while True:
@@ -91,6 +80,17 @@ class press:
 
             return shoulder_position_right if shoulder_position_right != 0 else shoulder_position_left
 
+    def get_elbow_value(self, iteration):
+        while True:
+            elbow_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_SHOULDER_VALUE,))
+            elbow_position_left, trust = self.json_reader.get_values(iteration, (LEFT_SHOULDER_VALUE,))
+
+            if elbow_position_left == elbow_position_right == 0:
+                iteration -= 1
+                continue
+
+            return elbow_position_right if elbow_position_right != 0 else elbow_position_left
+
     def get_hip_value(self, iteration):
         while True:
             hip_position, trust = self.json_reader.get_values(iteration, (HIP_VALUE,))
@@ -104,10 +104,12 @@ class press:
         # check next 5 frames
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (RIGHT_WRIST_VALUE,))
-            if point >= wrist_y_position:
+            if point[1] >= wrist_y_position:
                 bigger_points += 1
 
-        if bigger_points >= 4:
+            wrist_y_position = point[1]
+
+        if bigger_points >= 2:
             return True
 
         return False
@@ -117,21 +119,27 @@ class press:
         # check next 5 frames
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (RIGHT_WRIST_VALUE,))
-            if point <= wrist_y_position:
+            if point[1] <= wrist_y_position:
                 lower_points += 1
 
-        if lower_points >= 4:
+            wrist_y_position = point[1]
+
+        if lower_points >= 2:
             return True
 
         return False
 
     def check_exercise(self):
+        list_of_frames = {}
+        was_no_rep = False
         last_value_x = 0
         last_value_y = 0
         new_value_y = 0
+        first_rep_detected = False
+        first_rep_y_value = 0
         going_down = False  # movement starts by going up
         for i in range(0, self.json_reader.number_of_files + 1):
-            value, trust = self.json_reader.get_values(i, (RIGHT_ELBOW_VALUE,))
+            value, trust = self.json_reader.get_values(i, (RIGHT_WRIST_VALUE,))
 
             if self.counted_reps == self.reps:
                 break
@@ -142,41 +150,59 @@ class press:
             if i == 0:
                 last_value_x = value[0]
                 last_value_y = value[1]
+                first_rep_y_value = value[1]
+                first_rep_detected = True
                 continue
 
             new_value_y = value[1]
 
-            if going_down and last_value_y < new_value_y and not check_close(new_value_y, last_value_y):
-                if not self.check_if_still_going_down(new_value_y, i):
-                    shoulder_x_position = self.get_shoulder_value(i)[0]
-                    wrist_x_position = self.get_wrist_value(i)[0]
+            if going_down and last_value_y < new_value_y:
+                if first_rep_detected is True and new_value_y < first_rep_y_value - 10:
+                    pass
+
+                elif not self.check_if_still_going_down(new_value_y, i):
+                    shoulder_x_position = self.get_shoulder_value(i)
+                    wrist_x_position = self.get_wrist_value(i)
                     self.counted_reps += 1
-                    if self.check_down_position(wrist_x_position, shoulder_x_position):
+
+                    if first_rep_detected is False:
+                        first_rep_detected = True
+                        first_rep_y_value = last_value_y
+
+                    if not self.check_down_position(wrist_x_position, shoulder_x_position) or was_no_rep:
+                        print("fez mal baixo", i)
                         self.correct_reps += 1
+                        list_of_frames[i] = "no rep"
                     else:
+                        print("fez bem baixo ", i, last_value_y, new_value_y)
                         self.no_reps += 1
+                        list_of_frames[i] = "rep"
 
                     going_down = False
 
-            elif not going_down and last_value_y > new_value_y and not check_close(last_value_y, new_value_y):
-                if not self.check_if_still_going_up(new_value_y, i):
-                    knee_x_position = self.get_knee_value(i, "x")
+            elif not going_down and last_value_y > new_value_y:
+                if first_rep_detected is True and new_value_y > first_rep_y_value - 50:
+                    pass
+
+                elif not self.check_if_still_going_up(new_value_y, i):
+                    knee_x_position = self.get_knee_value(i)[0]
                     shoulder_x_position = self.get_shoulder_value(i)[0]
                     wrist_x_position = self.get_wrist_value(i)[0]
                     hip_x_position = self.get_hip_value(i)[0]
-                    self.counted_reps += 1
-                    if self.check_up_position(hip_x_position, knee_x_position, shoulder_x_position[0], last_value_x, wrist_x_position):
-                        self.correct_reps += 1
+                    elbow_x_position = self.get_elbow_value(i)[0]
+
+                    if not self.check_up_position(hip_x_position, knee_x_position, shoulder_x_position, elbow_x_position, last_value_x):
+                        print("fez mal cima ", i)
+                        was_no_rep = True
                     else:
-                        self.no_reps += 1
-                        if self.no_reps + self.correct_reps == self.counted_reps:
-                            self.no_reps -= 1
+                        print("fez bem cima ", i)
+                        was_no_rep = False
 
                     going_down = True
 
             last_value_y = value[1]
             last_value_x = value[0]
 
-        return self.correct_reps, self.no_reps
+        return self.correct_reps, self.no_reps, list_of_frames
 
 
