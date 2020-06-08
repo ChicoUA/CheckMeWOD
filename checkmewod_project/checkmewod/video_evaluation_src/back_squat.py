@@ -1,4 +1,4 @@
-from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close3, check_close4
+from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close3, check_close4, check_close6
 from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
@@ -42,7 +42,7 @@ class back_squat:
             return False
 
     def check_up_position(self, shoulder_position, hip_x_position, knee_x_position, elbow_position, wrist_position):
-        if check_close2(shoulder_position[0], hip_x_position) and check_close2(hip_x_position, knee_x_position):
+        if check_close6(shoulder_position[0], hip_x_position) and check_close6(hip_x_position, knee_x_position):
             if elbow_position[1] > shoulder_position[1] and (elbow_position[0] < shoulder_position[0] or check_close3(elbow_position[0], shoulder_position[0])):
                 
                 if check_close4(wrist_position[0], shoulder_position[0]) and check_close4(wrist_position[1], shoulder_position[1]):
