@@ -11,6 +11,7 @@ from checkmewod.video_evaluation_src.push_up import push_up
 from checkmewod.video_evaluation_src.back_squat import back_squat
 from checkmewod.video_evaluation_src.deadlift import deadlift
 from checkmewod.video_evaluation_src.overhead_squat import overhead_squat
+from checkmewod.video_evaluation_src.single_leg_squat import single_leg_squat
 from django.conf import settings
 from django.core.mail import send_mail
 from checkmewod_project import settings
@@ -113,8 +114,12 @@ def evaluate_video(id):
         overhead_squat_exerc = overhead_squat(int(info.number_reps), json_folder)
         reps, no_reps, frames_per_rep = overhead_squat_exerc.check_exercise()
 
+    elif str(info.exercise_in_video) == "Single Leg Squat":
+        single_leg_squat_exerc = single_leg_squat(int(info.number_reps), json_folder)
+        reps, no_reps, frames_per_rep = single_leg_squat_exerc.check_exercise()
+
     else:
-        print("alguma coisa correu mal no teste das squats")
+        print("exercicio nao esta disponivel")
 
     print("reps: " + str(reps))
     print("no_reps: " + str(no_reps))
