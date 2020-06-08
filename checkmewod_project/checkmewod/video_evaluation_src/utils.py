@@ -24,3 +24,9 @@ def check_close4(pos1, pos2):
         return True
     else:
         return False
+
+def check_close5(pos1, pos2):
+    if pos2 - 1 <= pos1 <= pos2 + 1:
+        return True
+    else:
+        return False

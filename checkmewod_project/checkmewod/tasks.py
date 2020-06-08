@@ -8,6 +8,8 @@ from checkmewod.video_evaluation_src.front_squat import front_squat
 from checkmewod.video_evaluation_src.press import press
 from checkmewod.video_evaluation_src.pull_up import pull_up
 from checkmewod.video_evaluation_src.push_up import push_up
+from checkmewod.video_evaluation_src.back_squat import back_squat
+from checkmewod.video_evaluation_src.deadlift import deadlift 
 from django.conf import settings
 from django.core.mail import send_mail
 from checkmewod_project import settings
@@ -97,6 +99,14 @@ def evaluate_video(id):
     elif str(info.exercise_in_video) == "Front Squat":
         front_squat_exerc = front_squat(int(info.number_reps), json_folder)
         reps, no_reps, frames_per_rep = front_squat_exerc.check_exercise()
+
+    elif str(info.exercise_in_video) == "Back Squat":
+        back_squat_exerc = back_squat(int(info.number_reps), json_folder)
+        reps, no_reps, frames_per_rep = back_squat_exerc.check_exercise()
+
+    elif str(info.exercise_in_video) == "Deadlift":
+        deadlift_exerc = deadlift(int(info.number_reps), json_folder)
+        reps, no_reps, frames_per_rep = deadlift_exerc.check_exercise()
 
     else:
         print("alguma coisa correu mal no teste das squats")
