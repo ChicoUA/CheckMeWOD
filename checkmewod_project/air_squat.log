@@ -1,0 +1,86 @@
+2020-06-24 00:58:18,600 Internal Server Error: /admin/logout/
+Traceback (most recent call last):
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/core/handlers/base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/core/handlers/base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/contrib/admin/sites.py", line 249, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/utils/decorators.py", line 130, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/views/decorators/cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/contrib/admin/sites.py", line 231, in inner
+    return view(request, *args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/views/decorators/cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/contrib/admin/sites.py", line 373, in logout
+    return LogoutView.as_view(**defaults)(request)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/views/generic/base.py", line 71, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/utils/decorators.py", line 43, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/views/decorators/cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/contrib/auth/views.py", line 119, in dispatch
+    next_page = self.get_next_page()
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/contrib/auth/views.py", line 133, in get_next_page
+    next_page = resolve_url(settings.LOGOUT_REDIRECT_URL)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/shortcuts.py", line 131, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/urls/base.py", line 87, in reverse
+    return iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs))
+  File "/home/wodadmin/.local/lib/python3.6/site-packages/django/urls/resolvers.py", line 677, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'checkmewod' not found. 'checkmewod' is not a valid view function or pattern name.
+2020-06-24 05:14:49,633 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-24 05:14:49,655 Bad Request: /
+2020-06-24 20:26:34,110 Not Found: /favicon.ico
+2020-06-24 21:07:28,632 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-24 21:07:28,655 Bad Request: /
+2020-06-24 21:31:58,161 Invalid HTTP_HOST header: 'ip.ws.126.net:443'. You may need to add 'ip.ws.126.net' to ALLOWED_HOSTS.
+2020-06-24 21:31:58,185 Bad Request: /ip.ws.126.net:443
+2020-06-24 21:32:07,572 Invalid HTTP_HOST header: '123.125.114.144'. You may need to add '123.125.114.144' to ALLOWED_HOSTS.
+2020-06-24 21:32:07,601 Bad Request: /http:/123.125.114.144/
+2020-06-24 23:27:49,834 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-24 23:27:49,860 Bad Request: /
+2020-06-25 00:30:44,791 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 00:30:44,810 Bad Request: /
+2020-06-25 08:16:08,987 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 08:16:09,008 Bad Request: /
+2020-06-25 09:21:34,638 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 09:21:34,662 Bad Request: /
+2020-06-25 09:32:11,783 Not Found: /favicon.ico
+2020-06-25 15:38:45,522 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 15:38:45,542 Bad Request: /
+2020-06-25 18:44:44,707 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 18:44:44,767 Bad Request: /
+2020-06-25 20:39:28,201 Invalid HTTP_HOST header: 'www.baidu.com'. You may need to add 'www.baidu.com' to ALLOWED_HOSTS.
+2020-06-25 20:39:28,225 Bad Request: /www.baidu.com:443
+2020-06-25 22:22:48,170 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 22:22:48,196 Bad Request: /
+2020-06-25 22:46:32,000 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 22:46:32,024 Bad Request: /
+2020-06-25 22:54:25,208 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-25 22:54:25,234 Bad Request: /
+2020-06-26 00:41:33,917 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-26 00:41:33,941 Bad Request: /
+2020-06-26 00:41:33,977 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-26 00:41:33,999 Bad Request: /
+2020-06-26 06:10:03,707 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-26 06:10:03,729 Bad Request: /
+2020-06-26 16:19:33,560 Not Found: /favicon.ico
+2020-06-26 19:37:44,754 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-26 19:37:44,778 Bad Request: /
+2020-06-26 20:23:41,180 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-26 20:23:41,205 Bad Request: /
+2020-06-27 01:22:01,403 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-27 01:22:01,429 Bad Request: /
+2020-06-27 05:15:02,113 Invalid HTTP_HOST header: 'checkmewod.internal.cloudapp.net:8000'. You may need to add 'checkmewod.internal.cloudapp.net' to ALLOWED_HOSTS.
+2020-06-27 05:15:02,138 Bad Request: /
+2020-06-27 10:08:39,302 Invalid HTTP_HOST header: 'ip.ws.126.net:443'. You may need to add 'ip.ws.126.net' to ALLOWED_HOSTS.
+2020-06-27 10:08:39,326 Bad Request: /ip.ws.126.net:443
+2020-06-27 11:25:37,968 Not Found: /favicon.ico
+2020-06-27 11:26:50,433 Not Found: /favicon.ico

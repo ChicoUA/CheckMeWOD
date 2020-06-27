@@ -147,3 +147,5 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'checkmewod@gmail.com'
 EMAIL_HOST_PASSWORD = 'projetoinformatica'
 EMAIL_USE_TLS = True
+
+ALLOWED_HOSTS = ['13.73.183.179', 'localhost', '127.0.0.1']

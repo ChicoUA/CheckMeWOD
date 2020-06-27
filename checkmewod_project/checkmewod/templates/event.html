@@ -48,17 +48,6 @@
                 
             </div>
 
-            <div class="row">
-                <div class="search">
-                    <form method="POST" enctype='multipart/form-data'>
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <input class="btn btn-primary" type="submit" value="Search">
-                    </form>
-
-                </div>
-            </div>
-
             <div class="events" style="padding-top:40px">
             {% for event in events %}
 
