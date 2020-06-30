@@ -44,6 +44,8 @@ class air_squat:
     def check_if_still_going_down(self, hip_y_position, iteration):
         bigger_points = 0
         # check next 5 frames
+        if iteration + 5 > self.json_reader.number_of_files - 1:
+            return True
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (HIP_VALUE,))
             if point[1] <= hip_y_position:
@@ -51,7 +53,7 @@ class air_squat:
 
             hip_y_position = point[1]
 
-        if bigger_points >= 3:
+        if bigger_points >= 2:
             return True
 
         return False
@@ -59,6 +61,8 @@ class air_squat:
     def check_if_still_going_up(self, hip_y_position, iteration):
         lower_points = 0
         # check next 5 frames
+        if iteration + 5 > self.json_reader.number_of_files - 1:
+            return True
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (HIP_VALUE,))
             if point[1] >= hip_y_position:
@@ -66,7 +70,7 @@ class air_squat:
 
             hip_y_position = point[1]
 
-        if lower_points >= 3:
+        if lower_points >= 2:
             return True
 
         return False
@@ -81,7 +85,7 @@ class air_squat:
             elif knee_position_left[0] != 0 or knee_position_right[0] != 0:
                 break
 
-        return knee_position_right if knee_position_right != 0 else knee_position_left
+        return knee_position_right if knee_position_right[0] != 0 else knee_position_left
 
     def get_shoulder_value(self, iteration):
         while True:
@@ -92,7 +96,7 @@ class air_squat:
                 iteration -= 1
                 continue
 
-            return shoulder_position_right if shoulder_position_right != 0 else shoulder_position_left
+            return shoulder_position_right if shoulder_position_right[0] != 0 else shoulder_position_left
 
     def check_exercise(self):
         list_of_frames = {}
@@ -113,8 +117,13 @@ class air_squat:
                 continue
 
             if i == 0:
+                first_rep_detected = True
+                first_rep_y_value = value[1]
                 last_value_x = value[0]
                 last_value_y = value[1]
+                continue
+
+            if i < 10:
                 continue
 
             new_value_y = value[1]
@@ -160,18 +169,25 @@ class air_squat:
 
                     going_down = False
 
+            if i == self.json_reader.number_of_files - 1 and self.reps > self.correct_reps:
+                knee_x_position = self.get_knee_value(i)[0]
+                shoulder_x_position = self.get_shoulder_value(i)[0]
+                self.counted_reps += 1
+                print(last_value_x, shoulder_x_position, knee_x_position)
+                if self.check_up_position(shoulder_x_position, last_value_x, knee_x_position) and not was_no_rep:
+                    print("fez bem cima ", i, first_rep_y_value)
+                    self.correct_reps += 1
+                    list_of_frames[i] = "rep"
+                else:
+                    print("fez mal cima ", i)
+                    self.no_reps += 1
+                    list_of_frames[i] = "no rep"
+                    # if self.no_reps + self.correct_reps == self.counted_reps:
+                    # self.no_reps -= 1
+                break
+
             last_value_y = value[1]
             last_value_x = value[0]
 
         return self.correct_reps, self.no_reps, list_of_frames
-
-
-def main():
-    squat = air_squat(3, "output_json/")
-    reps, no_reps, list_of_frames = squat.check_exercise()
-    print(reps, no_reps, list_of_frames)
-
-
-if __name__ == "__main__":
-    main()
 

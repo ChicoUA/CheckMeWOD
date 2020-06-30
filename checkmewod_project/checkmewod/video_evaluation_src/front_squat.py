@@ -1,4 +1,4 @@
-from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close4
+from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close4, check_close5
 from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
@@ -27,17 +27,19 @@ class front_squat:
         self.no_reps = 0
         self.json_reader.get_number_of_files()
 
-    def check_down_position(self, hip_y_position, knee_y_position, shoulder_y_position, wrist_y_position):
-        if hip_y_position > knee_y_position and check_close2(shoulder_y_position, wrist_y_position):
+    def check_down_position(self, hip_y_position, knee_y_position, shoulder_y_position, wrist_y_position, elbow_y_position):
+        print(hip_y_position, knee_y_position, shoulder_y_position, elbow_y_position)
+        if (hip_y_position > knee_y_position or check_close5(hip_y_position, knee_y_position)) and check_close(shoulder_y_position, elbow_y_position):
             self.logger.debug("Good down position: " + str(hip_y_position) + " - " + str(knee_y_position))
             return True
         else:
             self.logger.debug("Bad down position: " + str(hip_y_position) + " - " + str(knee_y_position))
             return False
 
-    def check_up_position(self, shoulder_x_position, hip_x_position, knee_x_position, shoulder_y_position, wrist_y_position):
-        if check_close(shoulder_x_position, hip_x_position) and check_close(hip_x_position, knee_x_position) \
-                and check_close4(shoulder_y_position, wrist_y_position):
+    def check_up_position(self, shoulder_x_position, hip_x_position, knee_x_position, shoulder_y_position, wrist_y_position, elbow_y_position):
+        print(shoulder_y_position, elbow_y_position)
+        if check_close4(shoulder_x_position, hip_x_position) and check_close4(hip_x_position, knee_x_position) \
+                and check_close(shoulder_y_position, elbow_y_position):
             self.logger.debug("Good up position: " + str(hip_x_position) + " - " + str(knee_x_position) + " - " + str(
                 shoulder_x_position))
             return True
@@ -49,14 +51,19 @@ class front_squat:
     def check_if_still_going_down(self, hip_y_position, iteration):
         bigger_points = 0
         # check next 5 frames
+        if iteration + 5 > self.json_reader.number_of_files - 1:
+            return True
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (HIP_VALUE,))
+            if point == 0:
+                continue
+
             if point[1] <= hip_y_position:
                 bigger_points += 1
 
             hip_y_position = point[1]
 
-        if bigger_points >= 3:
+        if bigger_points >= 2:
             return True
 
         return False
@@ -64,8 +71,12 @@ class front_squat:
     def check_if_still_going_up(self, hip_y_position, iteration):
         lower_points = 0
         # check next 5 frames
+        if iteration + 5 > self.json_reader.number_of_files - 1:
+            return True
         for i in range(0, 5):
             point, trust = self.json_reader.get_values(iteration + i + 1, (HIP_VALUE,))
+            if point == 0:
+                continue
             if point[1] >= hip_y_position:
                 lower_points += 1
 
@@ -81,22 +92,22 @@ class front_squat:
             knee_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_KNEE_VALUE,))
             knee_position_left, trust = self.json_reader.get_values(iteration, (LEFT_KNEE_VALUE,))
 
-            if knee_position_left == knee_position_right == 0:
+            if knee_position_left[0] == knee_position_right[0] == 0:
                 iteration += 1
                 continue
 
-            return knee_position_right if knee_position_right != 0 else knee_position_left
+            return knee_position_right if knee_position_right[0] != 0 else knee_position_left
 
     def get_shoulder_value(self, iteration):
         while True:
             shoulder_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_SHOULDER_VALUE,))
             shoulder_position_left, trust = self.json_reader.get_values(iteration, (LEFT_SHOULDER_VALUE,))
 
-            if shoulder_position_left == shoulder_position_right == 0:
+            if shoulder_position_left[0] == shoulder_position_right[0] == 0:
                 iteration += 1
                 continue
 
-            return shoulder_position_right if shoulder_position_right != 0 else shoulder_position_left
+            return shoulder_position_right if shoulder_position_right[0] != 0 else shoulder_position_left
 
     def get_wrist_value(self, iteration):
         while True:
@@ -114,11 +125,11 @@ class front_squat:
             elbow_position_right, trust = self.json_reader.get_values(iteration, (RIGHT_ELBOW_VALUE,))
             elbow_position_left, trust = self.json_reader.get_values(iteration, (LEFT_ELBOW_VALUE,))
 
-            if elbow_position_left == elbow_position_right == 0:
+            if elbow_position_left[0] == elbow_position_right[0] == 0:
                 iteration += 1
                 continue
 
-            return elbow_position_right if elbow_position_right != 0 else elbow_position_left
+            return elbow_position_right if elbow_position_right[0] != 0 else elbow_position_left
 
     def check_exercise(self):
         list_of_frames = {}
@@ -155,7 +166,8 @@ class front_squat:
                     knee_y_position = self.get_knee_value(i)[1]
                     wrist_y_position = self.get_wrist_value(i)[1]
                     shoulder_y_position = self.get_shoulder_value(i)[1]
-                    if not self.check_down_position(new_value_y, knee_y_position, shoulder_y_position, wrist_y_position):
+                    elbow_y_position = self.get_elbow_value(i)[1]
+                    if not self.check_down_position(new_value_y, knee_y_position, shoulder_y_position, wrist_y_position, elbow_y_position):
                         print("fez mal baixo ", i)
                         # self.correct_reps += 1
                         was_no_rep = True
@@ -163,23 +175,25 @@ class front_squat:
                         print("fez bem baixo ", i, last_value_y, new_value_y)
                         was_no_rep = False
 
+                    first_rep_y_value = new_value_y
                     going_down = True
 
             elif going_down and last_value_y > new_value_y:
-                if first_rep_detected is True and new_value_y > first_rep_y_value + 20:
+                if first_rep_detected is True and new_value_y > first_rep_y_value - 20:
                     pass
 
                 elif not self.check_if_still_going_down(new_value_y, i):
                     knee_x_position = self.get_knee_value(i)[0]
                     shoulder_position = self.get_shoulder_value(i)
                     wrist_y_position = self.get_wrist_value(i)[1]
+                    elbow_y_position = self.get_elbow_value(i)[1]
                     self.counted_reps += 1
 
                     if first_rep_detected is False:
                         first_rep_detected = True
                         first_rep_y_value = last_value_y
 
-                    if self.check_up_position(shoulder_position[0], last_value_x, knee_x_position, shoulder_position[1], wrist_y_position) and not was_no_rep:
+                    if self.check_up_position(shoulder_position[0], last_value_x, knee_x_position, shoulder_position[1], wrist_y_position, elbow_y_position) and not was_no_rep:
                         print("fez bem cima ", i, first_rep_y_value)
                         self.correct_reps += 1
                         list_of_frames[i] = "rep"
@@ -188,7 +202,26 @@ class front_squat:
                         self.no_reps += 1
                         list_of_frames[i] = "no rep"
 
+                    first_rep_y_value = new_value_y
                     going_down = False
+
+            if i == self.json_reader.number_of_files - 1 and self.reps > self.correct_reps:
+                knee_x_position = self.get_knee_value(i)[0]
+                shoulder_position = self.get_shoulder_value(i)
+                wrist_y_position = self.get_wrist_value(i)[1]
+                elbow_y_position = self.get_elbow_value(i)[1]
+                self.counted_reps += 1
+                if self.check_up_position(shoulder_position[0], last_value_x, knee_x_position, shoulder_position[1], wrist_y_position, elbow_y_position) and not was_no_rep:
+                    print("fez bem cima ", i, first_rep_y_value)
+                    self.correct_reps += 1
+                    list_of_frames[i] = "rep"
+                else:
+                    print("fez mal cima ", i)
+                    self.no_reps += 1
+                    list_of_frames[i] = "no rep"
+                    # if self.no_reps + self.correct_reps == self.counted_reps:
+                    # self.no_reps -= 1
+                break
 
             last_value_y = value[1]
             last_value_x = value[0]

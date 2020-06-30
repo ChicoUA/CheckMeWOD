@@ -1,4 +1,4 @@
-from checkmewod.video_evaluation_src.utils import check_close, check_close2
+from checkmewod.video_evaluation_src.utils import check_close, check_close2, check_close4
 from checkmewod.video_evaluation_src.json_reader import *
 import logging
 
@@ -33,7 +33,8 @@ class pull_up:
         return False
 
     def check_down_position(self, wrist_position, elbow_position, shoulder_position):
-        if check_close2(wrist_position, elbow_position) and check_close2(elbow_position, shoulder_position):
+        print(wrist_position, elbow_position, shoulder_position)
+        if check_close(wrist_position, elbow_position) and check_close(elbow_position, shoulder_position):
             return True
 
         return False
@@ -74,9 +75,9 @@ class pull_up:
     def check_if_still_going_down(self, nose_y_position, iteration):
         bigger_points = 0
         # check next 5 frames
+        if iteration + 5 > self.json_reader.number_of_files - 1:
+            return True
         for i in range(0, 5):
-            if iteration + i >= self.json_reader.number_of_files - 1:
-                break
             point, trust = self.json_reader.get_values(iteration + i + 1, (NOSE_VALUE,))
             if point[1] >= nose_y_position:
                 bigger_points += 1
@@ -120,9 +121,6 @@ class pull_up:
             if self.counted_reps == self.reps:
                 break
 
-            if i == self.json_reader.number_of_files + 1:
-                list_of_frames[i] = "no_rep"
-                break
 
             if not trust or value == 0:
                 continue
@@ -137,7 +135,7 @@ class pull_up:
             new_value_y = value[1]
 
             if going_down and last_value_y < new_value_y:
-                if first_rep_detected is True and new_value_y < first_rep_y_value - 100:
+                if first_rep_detected is True and new_value_y < first_rep_y_value - 20:
                     pass
 
                 elif not self.check_if_still_going_down(new_value_y, i):
@@ -158,11 +156,11 @@ class pull_up:
                         print("fez bem baixo ", i, last_value_y, new_value_y)
                         self.no_reps += 1
                         list_of_frames[i] = "rep"
-
+                    first_rep_y_value = new_value_y
                     going_down = False
 
             elif not going_down and last_value_y > new_value_y:
-                if first_rep_detected is True and new_value_y > first_rep_y_value - 20:
+                if first_rep_detected is True and new_value_y > first_rep_y_value + 20:
                     pass
 
                 elif not self.check_if_still_going_up(new_value_y, i):
@@ -174,7 +172,24 @@ class pull_up:
                         print("fez bem cima ", i)
                         was_no_rep = False
 
+                    first_rep_y_value = new_value_y
                     going_down = True
+
+            if i == self.json_reader.number_of_files - 1 and self.reps > self.correct_reps:
+                shoulder_x_position = self.get_shoulder_value(i)[0]
+                wrist_x_position = self.get_wrist_value(i)[0]
+                elbow_x_position = self.get_elbow_value(i)[0]
+                self.counted_reps += 1
+
+                if not self.check_down_position(wrist_x_position, elbow_x_position, shoulder_x_position) or was_no_rep:
+                    print("fez mal baixo", i)
+                    self.correct_reps += 1
+                    list_of_frames[i] = "no rep"
+                else:
+                    print("fez bem baixo ", i, last_value_y, new_value_y)
+                    self.no_reps += 1
+                    list_of_frames[i] = "rep"
+                break
 
             last_value_y = value[1]
             last_value_x = value[0]

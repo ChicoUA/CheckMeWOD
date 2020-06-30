@@ -20,13 +20,14 @@ def check_close3(pos1, pos2):
 
 
 def check_close4(pos1, pos2):
-    if pos2 - 40 <= pos1 <= pos2 + 40:
+    if pos2 - 35 <= pos1 <= pos2 + 35:
         return True
     else:
         return False
 
+
 def check_close5(pos1, pos2):
-    if pos2 - 1 <= pos1 <= pos2 + 1:
+    if pos2 - 20 <= pos1 <= pos2 + 20:
         return True
     else:
         return False
