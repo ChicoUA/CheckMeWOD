@@ -1,5 +1,5 @@
 Django==3.1.13
-celery==4.4.5
+celery==5.2.2
 django-countries
 opencv-python
 moviepy
